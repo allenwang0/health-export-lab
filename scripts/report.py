@@ -24,7 +24,7 @@ sys.path.insert(0, str(ROOT))
 from healthlab import build, parse, synth  # noqa: E402
 
 # The only place the repository name appears; set CARD_REPO if the repo is published under another name.
-REPO = __import__("os").environ.get("CARD_REPO", "apple-health-lab")
+REPO = __import__("os").environ.get("CARD_REPO", "health-export-lab")
 COMMAND = "python scripts/report.py"
 
 

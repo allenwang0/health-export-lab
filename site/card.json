@@ -1,6 +1,6 @@
 {
  "schema_version": 1,
- "repo": "apple-health-lab",
+ "repo": "health-export-lab",
  "sha": "9c54d34df0f1e626cd1689fc928067b2597950bb",
  "generated_at": "2026-11-12T06:06:29Z",
  "command": "python scripts/report.py",
