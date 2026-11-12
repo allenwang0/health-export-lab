@@ -1,0 +1,11 @@
+.venv/
+data/
+demo-data/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.hypothesis/
+*.zip
+*.duckdb
+.DS_Store
+.env*
