@@ -1,0 +1,27 @@
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+      - run: make setup PYTHON=python
+      - run: make lint
+      - run: make test
+      - run: make mutants
+      - run: make report
+      - uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-report
+          path: |
+            report/index.html
+            site/card.json
+            results/mutants.json
