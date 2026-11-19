@@ -11,7 +11,7 @@ All screenshots and numbers come from a synthetic export with known answers, not
 - Steps counted once: a plain sum gives 13,913,705 steps; removing iPhone and Watch overlap recovers the true 8,047,907 exactly.
 - Local time rebuilt hour by hour: days matching Apple's own daily totals go from 92.6% to 99.2%.
 - Every fix is proven necessary: reverting each of 14 fixes, one at a time, makes a test fail.
-- Streams the export zip without extracting it and parses 1,000,000 records in 10.6 s.
+- Streams the export zip without extracting it and parses a synthetic 1,000,000-record export in about 10 s on a laptop.
 
 ## Run it
 
