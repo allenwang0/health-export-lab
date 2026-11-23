@@ -2,7 +2,9 @@
 
 A local analyzer for Apple Health exports that fixes what the raw export gets wrong before running any statistics. Sum the steps naively and you count iPhone and Watch twice; read the timestamps literally and trips land in the wrong time zone.
 
-![Report built from the synthetic export](docs/report.png)
+![Report on the synthetic export: share of days matching Apple's daily totals](docs/report.png)
+
+Report: https://allenwang0.github.io/health-export-lab/
 
 All screenshots and numbers come from a synthetic export with known answers, not real health data.
 
