@@ -182,7 +182,6 @@ def render_page(a, err, weeks, worst, rows, changes, mutants, sha, start, end, r
 [data-stack] tr{{border-top:1px solid var(--hairline);padding:8px 0}}[data-stack] th{{padding:4px 12px}}
 [data-stack] td{{display:grid;grid-template-columns:7.5em 1fr;gap:8px;padding:2px 12px}}[data-stack] td::before{{content:attr(data-label);color:var(--ink-3)}}}}
 /* charts.js never draws narrower than 260 px; keep plots >= 260 px at 320 px so text stays >= 11 px */
-@media (max-width:359px){{.figure{{padding-inline:12px}}}}
 </style>
 <script src="kit/report.js" defer></script>
 <script src="kit/charts.js" defer></script>
@@ -204,8 +203,8 @@ def render_page(a, err, weeks, worst, rows, changes, mutants, sha, start, end, r
     <div class="fig-head"><div><h3 id="f-bands">Days whose active energy matches Apple's own daily total</h3>
     <p class="sub">Share of {n:,} days, by error against Apple's daily summary · one synthetic run</p></div>{toggle}</div>
     <div id="c-bands"></div>{band_table}
-  </figure>
   <figcaption>Each day's hourly active energy is summed by calendar day, either cut at the export's -0700 offset or at the local time rebuilt from the time-zone tags, then compared with the total Apple stored for that day. “Within 5 %” is the match criterion.</figcaption>
+  </figure>
 </section>
 
 <section class="wrap" aria-label="Key results">
@@ -238,8 +237,8 @@ def render_page(a, err, weeks, worst, rows, changes, mutants, sha, start, end, r
     <div class="fig-head"><div><h3 id="f-miss">The export offset misses all year; the rebuild misses only next to a move or trip</h3>
     <p class="sub">Days more than 5 % off Apple's total, by distance to the nearest planted zone change · {len(changes)} changes · one synthetic run</p></div>{toggle}</div>
     <div id="c-miss"></div>{miss_table}
-  </figure>
   <figcaption>Each bar counts the days one method gets more than 5 % wrong, grouped by how far the day is from the nearest zone change (a move, two trips, a return). The export offset is wrong on every day spent outside -0700, so its misses are spread out.</figcaption>
+  </figure>
 </section>
 
 {mut_html}
@@ -277,7 +276,7 @@ make demo       # local app on the synthetic export</code></pre></div>
 </section>
 </main>
 <footer><div class="wrap"><span><a href="{HUB}">← Allen Wang</a><a href="{CODE}">Code ↗</a></span>
-<span>Data: synthetic run of <span class="mono">{E(COMMAND)}</span> at commit <span class="mono">{E(sha[:7])}</span> · {datetime.now(timezone.utc):%Y-%m-%d}</span></div></footer>
+<span>Data from commit <span class="mono">{E(sha[:7])}</span> · {datetime.now(timezone.utc):%Y-%m-%d}</span></div></footer>
 <script type="application/json" id="rk-data">{json.dumps(data)}</script>
 <script>
 addEventListener("DOMContentLoaded", function () {{

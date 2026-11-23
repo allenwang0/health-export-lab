@@ -22,7 +22,6 @@
 [data-stack] tr{border-top:1px solid var(--hairline);padding:8px 0}[data-stack] th{padding:4px 12px}
 [data-stack] td{display:grid;grid-template-columns:7.5em 1fr;gap:8px;padding:2px 12px}[data-stack] td::before{content:attr(data-label);color:var(--ink-3)}}
 /* charts.js never draws narrower than 260 px; keep plots >= 260 px at 320 px so text stays >= 11 px */
-@media (max-width:359px){.figure{padding-inline:12px}}
 </style>
 <script src="kit/report.js" defer></script>
 <script src="kit/charts.js" defer></script>
@@ -44,8 +43,8 @@
     <div class="fig-head"><div><h3 id="f-bands">Days whose active energy matches Apple's own daily total</h3>
     <p class="sub">Share of 968 days, by error against Apple's daily summary · one synthetic run</p></div><div class="seg" role="radiogroup" aria-label="View" data-view-toggle><button role="radio" aria-checked="true" data-value="chart">Chart</button><button role="radio" aria-checked="false" data-value="table">Table</button></div></div>
     <div id="c-bands"></div><div class="rk-table" hidden><div class="tablewrap" tabindex="0" role="region" aria-label="Days by error against Apple&#x27;s daily active energy, of 968 days"><table><caption>Days by error against Apple&#x27;s daily active energy, of 968 days</caption><thead><tr><th scope="col">Error</th><th scope="col">Export offset</th><th scope="col">Rebuilt local time</th></tr></thead><tbody><tr><th scope="row">Within 5 % of Apple&#x27;s total</th><td>896 (92.6 %)</td><td>960 (99.2 %)</td></tr><tr><th scope="row">5–25 % off</th><td>53 (5.5 %)</td><td>2 (0.2 %)</td></tr><tr><th scope="row">More than 25 % off</th><td>19 (2.0 %)</td><td>6 (0.6 %)</td></tr></tbody></table></div></div>
-  </figure>
   <figcaption>Each day's hourly active energy is summed by calendar day, either cut at the export's -0700 offset or at the local time rebuilt from the time-zone tags, then compared with the total Apple stored for that day. “Within 5 %” is the match criterion.</figcaption>
+  </figure>
 </section>
 
 <section class="wrap" aria-label="Key results">
@@ -78,8 +77,8 @@
     <div class="fig-head"><div><h3 id="f-miss">The export offset misses all year; the rebuild misses only next to a move or trip</h3>
     <p class="sub">Days more than 5 % off Apple's total, by distance to the nearest planted zone change · 6 changes · one synthetic run</p></div><div class="seg" role="radiogroup" aria-label="View" data-view-toggle><button role="radio" aria-checked="true" data-value="chart">Chart</button><button role="radio" aria-checked="false" data-value="table">Table</button></div></div>
     <div id="c-miss"></div><div class="rk-table" hidden><div class="tablewrap" tabindex="0" role="region" aria-label="Days more than 5 % off Apple&#x27;s total, by distance to the nearest zone change"><table><caption>Days more than 5 % off Apple&#x27;s total, by distance to the nearest zone change</caption><thead><tr><th scope="col">Distance</th><th scope="col">Export offset</th><th scope="col">Rebuilt local time</th></tr></thead><tbody><tr><th scope="row">0–2 days from a zone change</th><td>9</td><td>8</td></tr><tr><th scope="row">3–30 days</th><td>18</td><td>0</td></tr><tr><th scope="row">More than 30 days</th><td>45</td><td>0</td></tr></tbody></table></div></div>
-  </figure>
   <figcaption>Each bar counts the days one method gets more than 5 % wrong, grouped by how far the day is from the nearest zone change (a move, two trips, a return). The export offset is wrong on every day spent outside -0700, so its misses are spread out.</figcaption>
+  </figure>
 </section>
 
 <section class="s wrap" id="tests" aria-labelledby="h-tests">
@@ -118,11 +117,11 @@ make test
 make mutants    # writes results/mutants.json
 make report     # rebuilds this page from a fresh synthetic run
 make demo       # local app on the synthetic export</code></pre></div>
-  <div class="rk-table"><div class="tablewrap" tabindex="0" role="region" aria-label="Run settings"><table><caption>Run settings</caption><thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Python</th><td>3.11</td></tr><tr><th scope="row">duckdb</th><td>2.0.0</td></tr><tr><th scope="row">pandas</th><td>3.1.1</td></tr><tr><th scope="row">lxml</th><td>6.1.3</td></tr><tr><th scope="row">Generator</th><td><span class="mono">healthlab/synth.py</span></td></tr><tr><th scope="row">Seed</th><td>0</td></tr><tr><th scope="row">Span</th><td>1,095 days (2022-01-03 to 2025-01-01)</td></tr><tr><th scope="row">Days compared</th><td>968 days with active energy in Apple's summary</td></tr><tr><th scope="row">Command</th><td><span class="mono">python scripts/report.py</span></td></tr><tr><th scope="row">Commit</th><td><span class="mono">afe7a14</span></td></tr><tr><th scope="row">Generated</th><td>2026-11-23 04:45 UTC</td></tr></tbody></table></div></div>
+  <div class="rk-table"><div class="tablewrap" tabindex="0" role="region" aria-label="Run settings"><table><caption>Run settings</caption><thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Python</th><td>3.11</td></tr><tr><th scope="row">duckdb</th><td>2.0.0</td></tr><tr><th scope="row">pandas</th><td>3.1.1</td></tr><tr><th scope="row">lxml</th><td>6.1.3</td></tr><tr><th scope="row">Generator</th><td><span class="mono">healthlab/synth.py</span></td></tr><tr><th scope="row">Seed</th><td>0</td></tr><tr><th scope="row">Span</th><td>1,095 days (2022-01-03 to 2025-01-01)</td></tr><tr><th scope="row">Days compared</th><td>968 days with active energy in Apple's summary</td></tr><tr><th scope="row">Command</th><td><span class="mono">python scripts/report.py</span></td></tr><tr><th scope="row">Commit</th><td><span class="mono">6c1713f</span></td></tr><tr><th scope="row">Generated</th><td>2026-11-23 05:10 UTC</td></tr></tbody></table></div></div>
 </section>
 </main>
 <footer><div class="wrap"><span><a href="https://allenwang0.github.io/">← Allen Wang</a><a href="https://github.com/allenwang0/health-export-lab">Code ↗</a></span>
-<span>Data: synthetic run of <span class="mono">python scripts/report.py</span> at commit <span class="mono">afe7a14</span> · 2026-11-23</span></div></footer>
+<span>Data from commit <span class="mono">6c1713f</span> · 2026-11-23</span></div></footer>
 <script type="application/json" id="rk-data">{"bands": [{"label": "Within 5 % of Apple's total", "naive": 896, "rebuilt": 960}, {"label": "5\u201325 % off", "naive": 53, "rebuilt": 2}, {"label": "More than 25 % off", "naive": 19, "rebuilt": 6}], "miss": [{"label": "0\u20132 days from a zone change", "naive": 9, "rebuilt": 8}, {"label": "3\u201330 days", "naive": 18, "rebuilt": 0}, {"label": "More than 30 days", "naive": 45, "rebuilt": 0}], "n": 968}</script>
 <script>
 addEventListener("DOMContentLoaded", function () {
