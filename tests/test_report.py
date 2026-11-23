@@ -19,8 +19,12 @@ def test_report_and_card_are_built_from_a_run(tmp_path):
     finally:
         for p in (page, card):
             p.write_bytes(keep[p]) if p in keep else p.unlink(missing_ok=True)
-    assert "SYNTHETIC" in html and "NaN" not in html
-    assert "Mean daily error (kcal)" in html and "Week" in html
+    assert "NaN" not in html
+    # The headline share and the time-zone misses are charted, the page says the data is synthetic
+    # next to the headline, and it loads the vendored kit by relative path (works under /<repo>/).
+    assert 'id="c-bands"' in html and 'id="c-miss"' in html and "matches Apple's daily totals on" in html
+    assert "Synthetic export, no real health data" in html
+    assert 'href="kit/report.css"' in html and (ROOT / "report" / "kit" / "charts.js").exists()
     assert set(c) == {"schema_version", "repo", "sha", "generated_at", "command", "data_note", "metric", "takeaway", "chart"}
     assert c["schema_version"] == 1 and re.fullmatch(r"[0-9a-f]{40}", c["sha"])
     datetime.strptime(c["generated_at"], "%Y-%m-%dT%H:%M:%SZ")
