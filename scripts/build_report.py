@@ -17,6 +17,7 @@ import argparse
 import json
 import math
 import pathlib
+import re
 import statistics
 import subprocess
 import sys
@@ -376,6 +377,9 @@ def build_page(data, d):
     t_steps = line_of("tests/test_traps.py", "def test_iphone_and_watch_steps_are_not_double_counted", "raw_step_sum")
     t_fdr = line_of("tests/test_traps.py", "def test_only_the_planted_effect_survives_fdr", "survivors")
     planted = line_of("healthlab/synth.py", "RestingHeartRate")
+    src = (ROOT / "healthlab/synth.py").read_text(encoding="utf-8")
+    after, base = (float(v) for v in re.search(r"gauss\((\d+) if ran else (\d+)", src).groups())
+    window = len(re.search(r"for k in \(([\d, ]+)\)\) if truth\[.workouts.\]", src).group(1).split(","))
     evidence = [
         ("E1", f"Plain sum {n0(d['plain'])} steps; healthlab {n0(d['recovered'])}; planted truth {n0(d['truth'])} (seed {seed})",
          "results/report.json → steps", blob("results/report.json"), "Verified"),
@@ -651,7 +655,7 @@ def build_page(data, d):
     stats_body = rk.join([
         rk.tag("p", Raw(f"The discovery step runs a fixed list of {fam['tested']} cross-metric tests on detrended, "
                         f"deseasonalised series and corrects all of them together with Benjamini–Hochberg, nulls included. "
-                        f"The generator plants one effect: resting heart rate about 2 bpm lower in the two days after a run "
+                        f"The generator plants one effect: resting heart rate {base - after:g} bpm lower (mean) in the {window} days after a run "
                         f'(<a class="src" href="{esc(blob("healthlab/synth.py", planted))}">healthlab/synth.py:{planted[0]}</a>).'),
                 class_="prose"),
         responsive_table(f"Tests surviving q ≤ 0.10, seed {seed}", ["Exposure", "Outcome", "Lag", "r", "q"], surv_rows,
