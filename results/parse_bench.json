@@ -1,0 +1,38 @@
+{
+ "synthetic": true,
+ "records": 1000000,
+ "record_type": "HeartRate",
+ "xml_bytes": 445333483,
+ "zip_bytes": 9992048,
+ "reps": 5,
+ "seconds": [
+  6.418,
+  6.075,
+  5.469,
+  5.29,
+  5.699
+ ],
+ "median_s": 5.699,
+ "min_s": 5.29,
+ "max_s": 6.418,
+ "timer": "time.perf_counter around parse.ingest",
+ "loadavg_before": [
+  6.44,
+  5.65,
+  6.19
+ ],
+ "loadavg_after": [
+  5.55,
+  5.5,
+  6.12
+ ],
+ "machine": {
+  "cpu": "Apple M5 Pro",
+  "cores": 15,
+  "memory_gib": 48,
+  "os": "macOS-27.0.1"
+ },
+ "python": "3.11.1",
+ "code_sha": "c67b786fec74b0eb08b7d4600511b5ffee718cac",
+ "date": "2026-11-23T04:58:37Z"
+}

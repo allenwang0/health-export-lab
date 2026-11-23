@@ -148,3 +148,28 @@ def test_importing_an_overlapping_export_again_adds_nothing(tmp_path):
         build.build(tmp_path / name)
         got.append(duckdb.connect(str(tmp_path / name / "lab.duckdb"), read_only=True).execute(q).fetchall()[0])
     assert got[0] == got[1]
+
+
+def test_only_the_planted_effect_survives_fdr(demo):
+    """The generator plants one effect: resting heart rate drops after a run. On this seed the
+    corrected family must keep exactly the tests that measure it and nothing else; a family that
+    dropped nulls before correcting, or lost the effect, changes the survivors.
+    results/report.json and the report state these survivors."""
+    from healthlab import data, insights
+    f = insights.relationship_family(data.load_daily(demo["con"]))
+    survivors = f[f.q <= .10]
+    assert int(f.p.notna().sum()) == 33, "the family is fixed in advance; its size must not drift"
+    assert sorted(zip(survivors.x, survivors.lag)) == [("active_kcal_worn", 1), ("run_mi", 1), ("run_mi", 2), ("workout_min", 1)]
+    assert (survivors.y == "rhr").all() and (survivors.r < 0).all(), "exercise goes with lower resting heart rate afterwards"
+
+
+def test_committed_report_numbers_match_a_fresh_run(demo):
+    """report/index.html is rendered from results/report.json; if the pipeline's answer for this
+    seed changes, the committed result must be regenerated, not left showing old numbers."""
+    import json
+    from pathlib import Path
+    r = json.loads((Path(__file__).parent.parent / "results" / "report.json").read_text())
+    assert (r["seed"], r["days"]) == (0, 1095)
+    assert r["steps"]["plain_sum"] == demo["truth"]["raw_step_sum"]
+    assert r["steps"]["truth"] == demo["truth"]["steps_sum"]
+    assert r["steps"]["recovered"] == pytest.approx(demo["daily"].steps.sum(), abs=1e-6)
