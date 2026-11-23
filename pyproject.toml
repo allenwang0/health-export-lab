@@ -1,6 +1,6 @@
 [tool.ruff]
 line-length = 400
-extend-exclude = ["web/vendor"]
+extend-exclude = ["web/vendor", "report-kit"]  # vendored, byte-identical to the canonical kit
 
 [tool.ruff.lint]
 select = ["E", "F", "W"]
