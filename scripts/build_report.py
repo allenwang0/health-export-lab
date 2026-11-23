@@ -332,19 +332,16 @@ def build_card(data, d):
 
 def readme_block(data, d):
     run, bench = data["run"], data["bench"]
+    fam = run["family"]
     return "\n".join([
-        f"- Steps counted once: a plain sum gives {n0(d['plain'])} steps, {pct_g(d['over'])} over the planted "
-        f"{n0(d['truth'])}; removing iPhone and Watch overlap recovers that total exactly, on {d['seeds_exact']} of "
-        f"{d['n_seeds']} seeds.",
-        f"- Local time rebuilt hour by hour: days within 5% of Apple's own daily totals go from {pct(d['naive5'])} to "
-        f"{pct(d['rebuilt5'])} (seed {run['seed']}; {span(*d['rebuilt5_rng'], pct)} over {d['n_seeds']} seeds).",
-        f"- Every fix is guarded: reverting each of {d['mutants']} fixes, one at a time, makes a test fail "
-        f"({d['killed']} of {d['mutants']}).",
-        f"- Streams the export zip without extracting it: {d['records']:,} synthetic records parse in "
-        f"{d['parse_s']:.1f}{THIN}s (median of {d['parse_reps']}, {bench['machine']['cpu']}).",
-        f"- Statistics corrected for many tests: on seed {run['seed']}, {run['family']['surviving']} of "
-        f"{run['family']['tested']} pre-listed tests survive, all the one effect the generator planted; over "
-        f"{d['n_seeds']} seeds that effect always survives, with weak extras on {d['extra_seeds']}.",
+        f"- Steps counted once: a plain sum overcounts by {pct_g(d['over'])}; removing iPhone and Watch overlap recovers "
+        f"the planted {n0(d['truth'])} exactly, on {d['seeds_exact']} of {d['n_seeds']} seeds.",
+        f"- Local time rebuilt: days within 5% of Apple's totals go from {pct(d['naive5'])} to {pct(d['rebuilt5'])} "
+        f"(seed {run['seed']}).",
+        f"- {d['killed']} of {d['mutants']} fixes guarded: reverting any one makes a test fail.",
+        f"- {d['records']:,} synthetic records parse in {d['parse_s']:.1f}{THIN}s (median of {d['parse_reps']}, "
+        f"{bench['machine']['cpu']}).",
+        f"- On seed {run['seed']}, the {fam['surviving']} of {fam['tested']} tests surviving correction are all the planted effect.",
     ])
 
 
