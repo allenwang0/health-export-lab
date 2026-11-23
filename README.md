@@ -14,7 +14,7 @@ All numbers and screenshots come from synthetic exports with planted answers, no
 - Steps counted once: a plain sum overcounts by 73%; removing iPhone and Watch overlap recovers the planted 8,047,907 exactly, on 20 of 20 seeds.
 - Local time rebuilt: days within 5% of Apple's totals go from 92.6% to 99.2% (seed 0).
 - 14 of 14 fixes guarded: reverting any one makes a test fail.
-- 1,000,000 synthetic records parse in 5.7 s (median of 5, Apple M5 Pro).
+- 1,000,000 synthetic records parse in 5.7 s (median of 5, Apple M5 Pro).
 - On seed 0, the 4 of 33 tests surviving correction are all the planted effect.
 <!-- results:end -->
 

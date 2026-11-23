@@ -33,7 +33,6 @@ REPO_URL = f"https://github.com/{REPO}"
 PAGE_URL = "https://allenwang0.github.io/health-export-lab/"
 HOME_URL = "https://allenwang0.github.io/"
 README_START, README_END = "<!-- results:start -->", "<!-- results:end -->"
-THIN = " "
 T, f = rk.svg_text, rk.coord
 WRAP = "white-space:normal;overflow-wrap:anywhere"  # the kit ellipsizes inline code; test names must stay whole
 EXERCISE_NAMES = {"run_mi": "run distance", "workout_min": "workout minutes", "active_kcal_worn": "active energy (worn days)",
@@ -135,42 +134,33 @@ def responsive_table(caption, head, rows, phone_rows, *, numeric=(), wrap_cols=(
 
 # ---------------------------------------------------------------- charts
 
-def legend(items, x, y):
-    """items: (kind, label) where kind is 'muted' | 'accent' | 'line-muted' | 'line-accent' | 'floor' | 'whisker'."""
-    parts = []
-    for kind, label in items:
-        if kind in ("muted", "accent"):
-            parts.append(f'<circle cx="{f(x + 5)}" cy="{f(y - 4)}" r="5" class="c-{kind}"/>')
-        elif kind == "whisker":
-            parts.append(f'<path class="c-whisker" d="M{f(x)} {f(y - 4)}H{f(x + 14)}M{f(x)} {f(y - 8)}V{f(y)}M{f(x + 14)} {f(y - 8)}V{f(y)}"/>')
-        else:
-            cls = {"line-muted": "c-stroke-muted", "line-accent": "c-line-accent", "floor": "c-floor"}[kind]
-            parts.append(f'<path class="{cls}" stroke-width="2" d="M{f(x)} {f(y - 4)}H{f(x + 16)}"/>')
-        parts.append(T(x + 22, y, label, "c-title"))
-        x += 22 + rk.text_width(label, 12) + 18
-    return parts
+def key_row(kind, label, x, y):
+    """One legend row for a mark rk.legend has no glyph for: 'whisker' (min-max range) or 'floor' (dashed rule).
+    y is the row's centre line, matching rk.legend's rows."""
+    if kind == "whisker":
+        glyph = f'<path class="c-whisker" d="M{f(x + 2)} {f(y)}H{f(x + 16)}M{f(x + 2)} {f(y - 4)}V{f(y + 4)}M{f(x + 16)} {f(y - 4)}V{f(y + 4)}"/>'
+    else:
+        glyph = f'<path class="c-floor" d="M{f(x)} {f(y)}H{f(x + 18)}"/>'
+    return [glyph, T(x + 24, y + 4, label, "c-label")]
 
 
 def dumbbell_chart(rows, *, uid, width, title, desc, axis_title):
     """One row per trap: plain reading (grey, with min-max over seeds) and healthlab (blue), x from 0 = planted truth.
     rows: dicts label, naive, fixed, naive_lo, naive_hi, text. Below 520 px the label sits above its track."""
-    stacked, two_line = width < 520, width < 800
+    stacked = width < 520
     label_w = 0 if stacked else max(rk.text_width(r["label"]) for r in rows) + 20
     text_w = 0 if stacked else max(rk.text_width(r["text"]) for r in rows) + 20
-    top = 64 if two_line else 44
     row_h = 46 if not stacked else 58
     plot_l, plot_r = (14, width - 18) if stacked else (label_w + 8, width - text_w - 10)
+    lx = 0 if stacked else plot_l
+    key, key_h = rk.legend([("plain reading", "dot", False), ("healthlab", "dot", True)], width=width - lx, x=lx)
+    top = 12 + key_h + 32
     hi = max(max(r["naive_hi"], r["naive"]) for r in rows)
     ticks = rk.nice_ticks(0, hi * 100, 5)
     vmax = ticks[-1] / 100
     x = lambda v: plot_l + (plot_r - plot_l) * v / vmax  # noqa: E731
     bottom = top + row_h * len(rows) - 8
-    parts = []
-    if two_line:
-        parts += legend([("muted", "plain reading"), ("accent", "healthlab")], 0 if stacked else plot_l, 14)
-        parts += legend([("whisker", f"plain reading, range over {rows[0]['n']} seeds")], 0 if stacked else plot_l, 36)
-    else:
-        parts += legend([("muted", "plain reading"), ("accent", "healthlab"), ("whisker", f"plain reading, range over {rows[0]['n']} seeds")], plot_l, 14)
+    parts = [key] + key_row("whisker", f"plain reading, range over {rows[0]['n']} seeds", lx, 12 + key_h)
     spans = [(top - 10, bottom)] if not stacked else [(top + i * row_h + 10, top + i * row_h + row_h - 4) for i in range(len(rows))]
     for t in ticks:
         for a, b in spans:
@@ -199,20 +189,16 @@ def dumbbell_chart(rows, *, uid, width, title, desc, axis_title):
 def weekly_chart(weeks, changes, *, uid, width, height, title, desc):
     """Weekly mean daily error, export offset (grey) vs rebuilt local time (blue); dashed verticals at zone changes."""
     narrow = width < 520
-    ml, mr, mt, mb = 44, 12, 52 if not narrow else 96, 40
+    kx = 0 if narrow else 44
+    key, key_h = rk.legend([("-0700 export offset", "line", False), ("rebuilt local time", "line", True)], width=width - kx, x=kx)
+    ml, mr, mt, mb = 44, 12, 12 + key_h + 48, 40
     days = [date.fromisoformat(w[0]).toordinal() for w in weeks]
     x0, x1 = min(days), max(days)
     ymax = max(max(w[1], w[2]) for w in weeks)
     yt = rk.nice_ticks(0, ymax, 4 if narrow else 5)
     px = lambda d: ml + (width - ml - mr) * (d - x0) / (x1 - x0)  # noqa: E731
     py = lambda v: height - mb - (height - mt - mb) * v / yt[-1]  # noqa: E731
-    parts = []
-    if narrow:
-        parts += legend([("line-muted", "-0700 export offset"), ("line-accent", "rebuilt local time")][:1], 0, 14)
-        parts += legend([("line-accent", "rebuilt local time")], 0, 34)
-        parts += legend([("floor", "zone change")], 0, 54)
-    else:
-        parts += legend([("line-muted", "-0700 export offset"), ("line-accent", "rebuilt local time"), ("floor", "zone change")], ml, 14)
+    parts = [key] + key_row("floor", "zone change", kx, 12 + key_h)
     for t in yt:
         parts.append(f'<path class="c-grid" d="M{ml} {f(py(t))}H{f(width - mr)}"/>')
         parts.append(T(ml - 8, py(t) + 4, f"{t:g}", "c-tick", "end"))
@@ -339,7 +325,7 @@ def readme_block(data, d):
         f"- Local time rebuilt: days within 5% of Apple's totals go from {pct(d['naive5'])} to {pct(d['rebuilt5'])} "
         f"(seed {run['seed']}).",
         f"- {d['killed']} of {d['mutants']} fixes guarded: reverting any one makes a test fail.",
-        f"- {d['records']:,} synthetic records parse in {d['parse_s']:.1f}{THIN}s (median of {d['parse_reps']}, "
+        f"- {d['records']:,} synthetic records parse in " + rk.num(f"{d['parse_s']:.1f}", "s") + f" (median of {d['parse_reps']}, "
         f"{bench['machine']['cpu']}).",
         f"- On seed {run['seed']}, the {fam['surviving']} of {fam['tested']} tests surviving correction are all the planted effect.",
     ])
@@ -392,7 +378,7 @@ def build_page(data, d):
          blob("results/mutants.json"), "Verified"),
         ("E7", f"{run['family']['surviving']} of {run['family']['tested']} pre-listed tests survive q ≤ 0.10, all exercise → resting heart rate",
          f"results/report.json; tests/test_traps.py:{t_fdr[0]}–{t_fdr[1]}", blob("tests/test_traps.py", t_fdr), "Verified"),
-        ("E8", f"{d['records']:,} records parsed in {d['parse_s']:.2f} s, median of {d['parse_reps']}",
+        ("E8", f"{d['records']:,} records parsed in " + rk.num(f"{d['parse_s']:.2f}", "s") + f", median of {d['parse_reps']}",
          "results/parse_bench.json", blob("results/parse_bench.json"), "Verified"),
         ("E9", "Overlap removed interval by interval in source priority order", f"healthlab/build.py:{dedupe[0]}–{dedupe[1]}",
          blob("healthlab/build.py", dedupe), "Verified"),
@@ -409,10 +395,10 @@ def build_page(data, d):
          {"label": "Planted truth", "value": d["truth"] / 1e6, "accent": False}],
         uid=uid, width=w, title="Total steps: plain sum, healthlab, planted truth",
         desc=f"Plain sum {n0(d['plain'])} steps; healthlab {n0(d['recovered'])}; planted truth {n0(d['truth'])}. Synthetic export, seed {seed}.",
-        axis_title="Total steps (millions), bars from zero", fmt=lambda v: f"{v:.2f}{THIN}M")
+        axis_title="Total steps (millions), bars from zero", fmt=lambda v: rk.num(f"{v:.2f}", "M"))
     hero = rk.hero(
         eyebrow="Data engineering · Python · Verification",
-        title="Health export lab",
+        title="health-export-lab",
         subtitle="A local Apple Health analyzer that corrects what a raw export gets wrong, and checks each correction "
                  "against an export whose right answers are known.",
         value=pct_g(d["over"]),
@@ -454,7 +440,7 @@ def build_page(data, d):
         ])),
         (4, 5, rk.join([
             rk.tag("h3", "Parses large exports quickly", class_="card-heading"),
-            rk.metric(f"{d['records'] / 1e6:g} M records", f"{d['parse_s']:.1f}", "s"),
+            rk.metric(rk.num(f"{d['records'] / 1e6:g}", "M") + " records", f"{d['parse_s']:.1f}", "s"),
             rk.tag("p", Raw(f"Median of {d['parse_reps']} runs on an {esc(bench['machine']['cpu'])}, synthetic heart-rate "
                             f"records in a zip.{R('E8')}")),
         ])),
@@ -482,7 +468,7 @@ def build_page(data, d):
     trap_rows = [
         ["iPhone and Watch count the same steps", f"{n0(d['plain'])} steps", f"{n0(d['recovered'])}", f"{n0(d['truth'])}"],
         ["Every timestamp carries the −0700 export offset", f"{pct(d['naive5'])} of days within 5%", pct(d["rebuilt5"]), "100%"],
-        ["Three sources score each Watch night", f"{sl['longest_source_h']:.2f} h (longest source)", f"{sl['analyzer_h']:.2f} h", f"{sl['truth_h']:.2f} h"],
+        ["Three sources score each Watch night", rk.num(f"{sl['longest_source_h']:.2f}", "h") + " (longest source)", rk.num(f"{sl['analyzer_h']:.2f}", "h"), rk.num(f"{sl['truth_h']:.2f}", "h")],
         ["Days with no data at all", f"{gp['days']} days of 0 steps", f"{gp['analyzer_null']} days unknown", f"{gp['days']} unknown days"],
         ["Older runs keep a few heart-rate samples", f"{sp['runs']} runs averaged from a median {sp['median_samples']:.0f} samples",
          f"{sp['analyzer_blank']} left blank", f"{sp['runs']} with no reliable average"],
@@ -491,7 +477,7 @@ def build_page(data, d):
         ["Watch worn only part of the day", f"{pw['days']} partial days counted as worn", f"{pw['excluded']} excluded", f"{pw['days']} partial days"],
     ]
     traps_fig = rk.figure(
-        "fig-errors", f"Each correction lands on, or within {max(r['fixed'] for r in drows) * 100:.1f} pp of, the planted answer",
+        "fig-errors", "Each correction lands on, or within " + rk.num(f"{max(r['fixed'] for r in drows) * 100:.1f}", "pp") + " of, the planted answer",
         dumb,
         rk.tag("p", Raw(f"Seed {seed}, {run['days']:,} synthetic days. Dots: error of the plain reading (grey) and of healthlab "
                         f"(blue) against the value the generator planted. Whiskers: the plain reading's range over {n} seeds; "
@@ -549,8 +535,8 @@ def build_page(data, d):
     # time
     weeks = t["weeks"]
     worst = max(weeks, key=lambda w: w[1])
-    wdesc = (f"{len(weeks)} weeks. Export offset: weekly mean error up to {worst[1]:.0f} kcal (week ending {worst[0]}). "
-             f"Rebuilt local time: up to {max(w[2] for w in weeks):.0f} kcal; zero in {sum(w[2] == 0 for w in weeks)} of {len(weeks)} weeks.")
+    wdesc = (f"{len(weeks)} weeks. Export offset: weekly mean error up to " + rk.num(f"{worst[1]:.0f}", "kcal") + f" (week ending {worst[0]}). "
+             "Rebuilt local time: up to " + rk.num(f"{max(w[2] for w in weeks):.0f}", "kcal") + f"; zero in {sum(w[2] == 0 for w in weeks)} of {len(weeks)} weeks.")
     wtitle = "Weekly mean daily error against Apple's total, export offset versus rebuilt local time"
     wk = rk.variants(weekly_chart(weeks, t["zone_changes"], uid="wk-d", width=1000, height=380, title=wtitle, desc=wdesc),
                      weekly_chart(weeks, t["zone_changes"], uid="wk-t", width=640, height=320, title=wtitle, desc=wdesc),
@@ -654,7 +640,7 @@ def build_page(data, d):
     stats_body = rk.join([
         rk.tag("p", Raw(f"The discovery step runs a fixed list of {fam['tested']} cross-metric tests on detrended, "
                         f"deseasonalised series and corrects all of them together with Benjamini–Hochberg, nulls included. "
-                        f"The generator plants one effect: resting heart rate {base - after:g} bpm lower (mean) in the {window} days after a run "
+                        f"The generator plants one effect: resting heart rate " + rk.num(f"{base - after:g}", "bpm") + f" lower (mean) in the {window} days after a run "
                         f'(<a class="src" href="{esc(blob("healthlab/synth.py", planted))}">healthlab/synth.py:{planted[0]}</a>).'),
                 class_="prose"),
         responsive_table(f"Tests surviving q ≤ 0.10, seed {seed}", ["Exposure", "Outcome", "Lag", "r", "q"], surv_rows,
@@ -692,7 +678,7 @@ def build_page(data, d):
                   rk.tag("p", Raw(f"<code>healthlab/parse.py</code> streams <code>export.xml</code> out of the zip with "
                                   f"<code>lxml</code>'s <code>iterparse</code> and writes Parquet; <code>build.py</code> loads "
                                   f"it into DuckDB and does stages 2–4; <code>insights.py</code> stage 5. The parse stage handled "
-                                  f"{d['records']:,} records in {d['parse_s']:.1f}{THIN}s here.{R('E8')}"))),
+                                  f"{d['records']:,} records in " + rk.num(f"{d['parse_s']:.1f}", "s") + f" here.{R('E8')}"))),
         shots,
     ])
     how_sec = rk.section("how", "The export is parsed once, corrected in three stages, then tested", how_body, eyebrow="How it works")
@@ -709,10 +695,10 @@ def build_page(data, d):
         ("Mutation check", f"{d['mutants']} one-line patches, each run against its named test (results/mutants.json)"),
         ("Parse timing", f"{d['records']:,} synthetic heart-rate records from tests/synthetic.bulk, zipped "
                          f"({bench['zip_bytes'] / 2**20:.0f} MiB zip, {bench['xml_bytes'] / 2**20:.0f} MiB XML); "
-                         f"{bench['timer']}; {d['parse_reps']} repetitions, median {bench['median_s']:.2f} s, "
-                         f"range {bench['min_s']:.2f}–{bench['max_s']:.2f} s"),
+                         f"{bench['timer']}; {d['parse_reps']} repetitions, median " + rk.num(f"{bench['median_s']:.2f}", "s") + ", "
+                         f"range {bench['min_s']:.2f}–" + rk.num(f"{bench['max_s']:.2f}", "s")),
         ("Timing hardware", f"{m['cpu']}, {m['cores']} cores, {m['memory_gib']} GiB, {m['os']}; python {bench['python']}"),
-        ("Load average", f"{load_text(bench['loadavg_before'])} before, {load_text(bench['loadavg_after'])} after (1 / 5 / 15 min); "
+        ("Load average", f"{load_text(bench['loadavg_before'])} before, {load_text(bench['loadavg_after'])} after (1 / 5 / {rk.num(15, 'min')}); "
                          f"shared machine, timing runs serialised with a lock"),
         ("Timing run date", bench["date"][:10]),
     ])
@@ -759,7 +745,7 @@ def build_page(data, d):
             f"{esc(info['code_sha'][:7])} · runs {esc(info['date'][:10])} · synthetic data"),
         Raw(f'<a href="{HOME_URL}">Allen Wang</a> · <a href="{REPO_URL}">Source</a>'))
     return rk.page(
-        title="Health export lab · Allen Wang",
+        title="health-export-lab · Allen Wang",
         description=(f"A local Apple Health analyzer that removes a {pct_g(d['over'])} step overcount exactly and rebuilds "
                      f"local time, scored against planted truth in synthetic exports."),
         canonical=PAGE_URL,
