@@ -34,6 +34,7 @@ HOME_URL = "https://allenwang0.github.io/"
 README_START, README_END = "<!-- results:start -->", "<!-- results:end -->"
 THIN = " "
 T, f = rk.svg_text, rk.coord
+WRAP = "white-space:normal;overflow-wrap:anywhere"  # the kit ellipsizes inline code; test names must stay whole
 EXERCISE_NAMES = {"run_mi": "run distance", "workout_min": "workout minutes", "active_kcal_worn": "active energy (worn days)",
                   "run_min": "run minutes", "runs": "runs", "workout_kcal": "workout energy", "active_kcal": "active energy"}
 METRIC_NAMES = {"rhr": "resting heart rate", **EXERCISE_NAMES}
@@ -124,10 +125,11 @@ def load_text(xs):
     return " / ".join(f"{v:.2f}" for v in xs)
 
 
-def responsive_table(caption, head, rows, phone_rows, *, numeric=(), wrap_cols=()):
-    """Table on desktop and tablet; a definition list on phones, where four columns would scroll sideways."""
+def responsive_table(caption, head, rows, phone_rows, *, numeric=(), wrap_cols=(), tablet_list=False):
+    """Table on desktop (and tablet); a definition list where the columns would scroll sideways."""
     table = rk.table(caption, head, rows, numeric=numeric, wrap_cols=wrap_cols)
-    return rk.variants(table, table, rk.tag("p", caption, class_="card-label") + rk.methodology(phone_rows))
+    listed = rk.tag("p", caption, class_="card-label") + rk.methodology(phone_rows)
+    return rk.variants(table, listed if tablet_list else table, listed)
 
 
 # ---------------------------------------------------------------- charts
@@ -151,21 +153,21 @@ def legend(items, x, y):
 def dumbbell_chart(rows, *, uid, width, title, desc, axis_title):
     """One row per trap: plain reading (grey, with min-max over seeds) and healthlab (blue), x from 0 = planted truth.
     rows: dicts label, naive, fixed, naive_lo, naive_hi, text. Below 520 px the label sits above its track."""
-    stacked = width < 520
+    stacked, two_line = width < 520, width < 800
     label_w = 0 if stacked else max(rk.text_width(r["label"]) for r in rows) + 20
     text_w = 0 if stacked else max(rk.text_width(r["text"]) for r in rows) + 20
-    top = 44 if not stacked else 64
+    top = 64 if two_line else 44
     row_h = 46 if not stacked else 58
-    plot_l, plot_r = label_w + 8, width - text_w - 10
+    plot_l, plot_r = (14, width - 18) if stacked else (label_w + 8, width - text_w - 10)
     hi = max(max(r["naive_hi"], r["naive"]) for r in rows)
     ticks = rk.nice_ticks(0, hi * 100, 5)
     vmax = ticks[-1] / 100
     x = lambda v: plot_l + (plot_r - plot_l) * v / vmax  # noqa: E731
     bottom = top + row_h * len(rows) - 8
     parts = []
-    if stacked:
-        parts += legend([("muted", "plain reading"), ("accent", "healthlab")], 0, 14)
-        parts += legend([("whisker", f"plain reading, range over {rows[0]['n']} seeds")], 0, 36)
+    if two_line:
+        parts += legend([("muted", "plain reading"), ("accent", "healthlab")], 0 if stacked else plot_l, 14)
+        parts += legend([("whisker", f"plain reading, range over {rows[0]['n']} seeds")], 0 if stacked else plot_l, 36)
     else:
         parts += legend([("muted", "plain reading"), ("accent", "healthlab"), ("whisker", f"plain reading, range over {rows[0]['n']} seeds")], plot_l, 14)
     spans = [(top - 10, bottom)] if not stacked else [(top + i * row_h + 10, top + i * row_h + row_h - 4) for i in range(len(rows))]
@@ -241,7 +243,7 @@ def strip_chart(rows, *, uid, width, title, desc, axis_title):
     ticks = [t for t in ticks if t <= 100]
     a, b = ticks[0], 100
     top, row_h = 14 if not stacked else 24, 50 if not stacked else 64
-    plot_l, plot_r = label_w + 8, width - (0 if stacked else text_w) - 10
+    plot_l, plot_r = (16, width - 20) if stacked else (label_w + 8, width - text_w - 10)
     x = lambda v: plot_l + (plot_r - plot_l) * (v * 100 - a) / (b - a)  # noqa: E731
     bottom = top + row_h * len(rows)
     parts = []
@@ -259,7 +261,7 @@ def strip_chart(rows, *, uid, width, title, desc, axis_title):
             parts.append(T(width, cy + 4.5, r["text"], "c-value", "end"))
         for k, v in enumerate(r["values"]):
             parts.append(f'<circle cx="{f(x(v))}" cy="{f(cy + ((k % 5) - 2) * 3.5)}" r="4" class="{"c-accent" if r["accent"] else "c-muted"}" fill-opacity=".75"/>')
-    parts.append(T(plot_l, bottom + 36, f"{axis_title}, axis starts at {a:g}%", "c-title"))
+    parts.append(T(0 if stacked else plot_l, bottom + 36, f"{'Days within 5%' if stacked else axis_title}, axis from {a:g}%", "c-title"))
     return rk.svg(uid, width, bottom + 44, title, desc, "".join(parts))
 
 
@@ -505,7 +507,7 @@ def build_page(data, d):
     trap_table = responsive_table(f"Seven planted errors, seed {seed}: plain reading, healthlab, planted truth",
                                   ["Planted error", "Plain reading", "healthlab", "Planted truth"], trap_rows,
                                   [(r[0], f"Plain reading: {r[1]}. healthlab: {r[2]}. Truth: {r[3]}.") for r in trap_rows],
-                                  wrap_cols={0, 1, 3})
+                                  wrap_cols={0, 1, 3}, tablet_list=True)
     traps_sec = rk.section(
         "traps", "A plain reading of the export gets every planted error wrong",
         rk.join([traps_fig, Raw('<h3 class="sub">All seven planted errors</h3>'), trap_table]), eyebrow="Result",
@@ -551,13 +553,19 @@ def build_page(data, d):
                      weekly_chart(weeks, t["zone_changes"], uid="wk-t", width=640, height=320, title=wtitle, desc=wdesc),
                      weekly_chart(weeks, t["zone_changes"], uid="wk-p", width=320, height=340, title=wtitle, desc=wdesc))
     boise = [w for w in weeks if w[1] == 0 and w[2] == 0]
+    zone_at = lambda day: next((z for c, z in reversed(t["zone_changes"]) if c <= day), None)  # noqa: E731
+    if not all(zone_at(w[0]) == "America/Boise" and int(w[0][5:7]) in (11, 12, 1, 2, 3) for w in boise):
+        sys.exit("a week with zero error on both methods is not a Boise winter week: rewrite the time-zone copy")
+    change_days = [date.fromisoformat(c).toordinal() for c, _ in t["zone_changes"]]
+    near_weeks = sum(w[2] > 0 and any(abs(date.fromisoformat(w[0]).toordinal() - c) <= 10 for c in change_days) for w in weeks)
     time_fig = rk.figure(
-        "fig-time", f"The export offset is off in {sum(w[1] > 0 for w in weeks)} of {len(weeks)} weeks; rebuilt time in "
-                    f"{sum(w[2] > 0 for w in weeks)}, all near a zone change or DST switch",
+        "fig-time", f"The export offset is off in {sum(w[1] > 0 for w in weeks)} of {len(weeks)} weeks; rebuilt local time "
+                    f"in {sum(w[2] > 0 for w in weeks)}",
         wk,
         rk.tag("p", Raw(f"Weekly mean of the absolute daily difference between Apple's ring total (keyed by the true local "
                         f"date) and the day's hourly active energy, on {t['days_compared']:,} days with a ring total; seed "
-                        f"{seed}, synthetic. Dashed lines: the {len(t['zone_changes'])} zone changes. {t['misses_near_change']} of "
+                        f"{seed}, synthetic. Dashed lines: the {len(t['zone_changes'])} zone changes; {near_weeks} of the "
+                        f"{sum(w[2] > 0 for w in weeks)} weeks with any rebuilt-time error end within 10 days of one. {t['misses_near_change']} of "
                         f"the {t['misses_rebuilt']} days rebuilt time misses by more than 5% fall within 2 days of a zone change, "
                         f"which tags place only to within about a day.{R('E4')}")),
         question="Does cutting days at the rebuilt local time match Apple's own daily totals?",
@@ -620,7 +628,7 @@ def build_page(data, d):
     by_test = {}
     for m in mut["mutants"]:
         by_test.setdefault(m["test"], []).append(m)
-    mut_rows = [[m["mutant"], Raw(f"<code>{esc(m['file'])}</code>"), Raw(f"<code>{esc(m['test'])}</code>"),
+    mut_rows = [[m["mutant"], Raw(f"<code>{esc(m['file'])}</code>"), Raw(f'<code style="{WRAP}">{esc(m["test"])}</code>'),
                  "killed" if m["killed"] else "SURVIVED"] for m in mut["mutants"]]
     shared = [k for k, v in by_test.items() if len(v) > 1]
     mut_body = rk.join([
@@ -630,8 +638,8 @@ def build_page(data, d):
                         + (f" (one test guards {len(by_test[shared[0]])} fixes)" if shared else "")
                         + f"; CI runs it on every push.{R('E6')}"), class_="prose"),
         responsive_table(f"{d['killed']} of {d['mutants']} mutants killed", ["Fix reverted", "File", "Test that fails", "Result"],
-                         mut_rows, [(m["mutant"], Raw(f"{'Killed' if m['killed'] else 'SURVIVED'} by <code>{esc(m['test'])}</code>"))
-                                    for m in mut["mutants"]], wrap_cols={0, 2}),
+                         mut_rows, [(m["mutant"], Raw(f'{"Killed" if m["killed"] else "SURVIVED"} by <code style="{WRAP}">{esc(m["test"])}</code>'))
+                                    for m in mut["mutants"]], wrap_cols={0, 2}, tablet_list=True),
     ])
     mut_sec = rk.section("mutants", f"Reverting any one of {d['mutants']} fixes makes its test fail", mut_body,
                          eyebrow="Test strength")
@@ -656,7 +664,7 @@ def build_page(data, d):
                 class_="prose", style="margin-top:24px"),
     ])
     stats_sec = rk.section(
-        "tests", f"{fam['surviving']} of {fam['tested']} pre-listed tests survive correction, all the planted effect",
+        "tests", f"On seed {seed}, {fam['surviving']} of {fam['tested']} pre-listed tests survive, all the planted effect",
         stats_body, eyebrow="Statistics")
 
     # how it works
@@ -666,7 +674,9 @@ def build_page(data, d):
                       'alt="Health Lab Data quality view: record counts, a double-counting table with raw and deduplicated '
                       'totals per metric, devices and apps, and the rebuilt time-zone timeline. Synthetic data.">'),
                   rk.tag("p", "Screenshot of the local web app (FastAPI + static JS) on the synthetic demo export. Its "
-                              "“Removed” column is the share of the plain sum dropped, not the overcount relative to truth.")),
+                              "“Removed” column is the share of the plain sum dropped, not the overcount relative to truth. Its "
+                              "“Days match Apple” tile scores a slightly different set of days than scripts/report.py, so it "
+                              "can differ from the figures above in the last digit.")),
         rk.figure("fig-ui-overview", "The overview reads only corrected tables",
                   Raw('<img src="img/ui-overview.png" width="1360" height="1000" decoding="async" style="width:100%;height:auto;border-radius:12px" '
                       'alt="Health Lab overview: record step total, 30-day averages for sleep, steps, resting heart rate and HRV, '

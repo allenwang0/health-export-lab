@@ -61,7 +61,7 @@ def test_key_numbers_match_results(tmp_path):
     assert f"Reverting any one of {m['total']} fixes makes its test fail" in text and m["killed"] == m["total"]
     assert f"{b['median_s']:.1f}" in text and b["reps"] >= 5
     fam = r["family"]
-    assert f"{fam['surviving']} of {fam['tested']} pre-listed tests survive correction" in text
+    assert f"On seed {r['seed']}, {fam['surviving']} of {fam['tested']} pre-listed tests survive" in text
     assert card["metric"]["value"] == round(rebuilt * 100, 1)
     assert f"{naive * 100:.1f}% to {rebuilt * 100:.1f}%" in readme
 
