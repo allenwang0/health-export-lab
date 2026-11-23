@@ -215,7 +215,7 @@ def render_page(a, err, weeks, worst, rows, changes, mutants, sha, start, end, r
     <a class="card span-4" href="#traps"><span class="label">Steps after removing overlap</span><span class="metric num">{E(steps['got'])}</span>
       <span class="cmp">Plain sum: {E(steps['naive'].split(' ')[0])}. Planted truth: {E(steps['truth'])}.</span><span class="foot">iPhone and Watch count the same steps</span></a>
     <a class="card span-4" href="#traps"><span class="label">Traps recovered exactly</span><span class="metric num">{exact} of {len(rows)}</span>
-      <span class="cmp">{"Time zones: " + pct(rebuilt) + " of days match, not 100\u00a0%." if not tz['exact'] else "Every trap matches the planted truth."}</span><span class="foot">Against the generator's planted answers</span></a>
+      <span class="cmp">{"Time zones: " + pct(rebuilt) + " of days match, not 100 %." if not tz['exact'] else "Every trap matches the planted truth."}</span><span class="foot">Against the generator's planted answers</span></a>
     {mut_card}
     <div class="card span-4"><span class="label">Data</span><span class="metric num">Synthetic</span>
       <span class="cmp">Generated with planted traps. No real health data is in the repo or on this page.</span><span class="foot">healthlab/synth.py · {start} to {end}</span></div>
@@ -224,7 +224,7 @@ def render_page(a, err, weeks, worst, rows, changes, mutants, sha, start, end, r
 
 <section class="s wrap" id="traps" aria-labelledby="h-traps">
   <p class="eyebrow">Each trap · naive vs analyzer vs planted truth</p>
-  <h2 id="h-traps">The analyzer recovers the planted answer on {exact} of {len(rows)} traps{"; time zones reach " + pct(rebuilt) + " of days, not 100\u00a0%" if not tz['exact'] else ""}</h2>
+  <h2 id="h-traps">The analyzer recovers the planted answer on {exact} of {len(rows)} traps{"; time zones reach " + pct(rebuilt) + " of days, not 100 %" if not tz['exact'] else ""}</h2>
   <p class="lede">The naive answer is what you get by reading the export literally. The planted truth is what the generator put in. {"The time-zone row misses on " + str(len(miss['err_rebuilt'])) + " days; the next section shows where." if not tz['exact'] else ""}</p>
   {trap_table}
   <p class="caveat"><b>The traps and the fixes have the same author.</b> The generator plants the traps the analyzer was written to fix, so a match shows the fixes work on these traps. Real exports may hold traps this generator does not plant.</p>

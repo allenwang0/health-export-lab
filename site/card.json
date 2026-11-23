@@ -1,8 +1,8 @@
 {
  "schema_version": 1,
  "repo": "health-export-lab",
- "sha": "371646eb9a049214de21050fba21d9a7fc8ee16f",
- "generated_at": "2026-11-23T04:43:00Z",
+ "sha": "afe7a14413a5ab950fe8d8c997b2450d65f42534",
+ "generated_at": "2026-11-23T04:45:34Z",
  "command": "python scripts/report.py",
  "data_note": "SYNTHETIC Apple Health export from healthlab/synth.py, seed 0, 1095 days (2022-01-03 to 2025-01-01). No real health data.",
  "metric": {
