@@ -522,8 +522,10 @@ def build_page(data, d):
     # steps mechanism
     ex = run["steps"]["example"]
     plain_hour = sum(s["value"] for s in ex["samples"])
-    listing = "\n".join(f"{s['start']}–{s['end']} UTC  {s['source']:<22} {s['value']:>5.0f} steps" for s in ex["samples"])
-    listing += f"\n\nplain sum  {plain_hour:>5.0f}\nhealthlab  {ex['kept']:>5.0f}"
+    short = lambda name: "Watch" if "Watch" in name else "iPhone" if "iPhone" in name else name  # noqa: E731
+    listing = "UTC          source  steps\n" + "\n".join(
+        f"{s['start']}–{s['end']}  {short(s['source']):<6} {s['value']:>6.0f}" for s in ex["samples"])
+    listing += f"\n\nplain sum           {plain_hour:>6.0f}\nhealthlab           {ex['kept']:>6.0f}"
     watch = sum(s["value"] for s in ex["samples"] if "Watch" in s["source"])
     phone = sum(s["value"] for s in ex["samples"] if "iPhone" in s["source"])
     steps_body = rk.join([
