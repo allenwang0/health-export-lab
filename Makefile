@@ -1,7 +1,7 @@
 PYTHON ?= python3.11
 PY := .venv/bin/python
 
-.PHONY: setup test lint mutants report demo
+.PHONY: setup test lint mutants results bench report demo
 
 setup:
 	$(PYTHON) -m venv .venv
@@ -16,8 +16,15 @@ lint:
 mutants:
 	$(PY) scripts/mutation_check.py
 
-report:
+results:
 	$(PY) scripts/report.py
+	$(PY) scripts/report.py --seeds 20
+
+bench:
+	$(PY) scripts/bench_parse.py
+
+report:
+	python3 scripts/build_report.py --card site/card.json --readme README.md
 
 demo:
 	./run.sh --demo

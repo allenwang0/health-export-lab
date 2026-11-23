@@ -1,0 +1,1551 @@
+{
+ "synthetic": true,
+ "days": 1095,
+ "run": {
+  "code_sha": "c67b786fec74b0eb08b7d4600511b5ffee718cac",
+  "date": "2026-11-23T04:53:27Z",
+  "python": "3.11.1",
+  "duckdb": "2.0.0",
+  "pandas": "3.1.1",
+  "platform": "macOS-27.0.1",
+  "machine": "arm64"
+ },
+ "seeds": [
+  {
+   "seed": 0,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 13913705.0,
+    "recovered": 8047907.0,
+    "truth": 8047907.0
+   },
+   "time": {
+    "days_compared": 968,
+    "within5_naive": 0.92562,
+    "within5_rebuilt": 0.991736,
+    "misses_rebuilt": 8,
+    "misses_near_change": 8
+   },
+   "sleep": {
+    "nights": 801,
+    "longest_source_h": 8.136392,
+    "analyzer_h": 6.976779,
+    "truth_h": 6.976779
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 124,
+    "median_samples": 4.0,
+    "analyzer_blank": 124
+   },
+   "partial_wear": {
+    "days": 113,
+    "excluded": 113
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 4,
+    "survivors_planted": true,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.293938,
+      "q": 4.39e-15,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.346671,
+      "q": 1.41e-20,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.294199,
+      "q": 4.39e-15,
+      "planted": true
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.282173,
+      "q": 9.12e-12,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 1,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 13941023.0,
+    "recovered": 8079154.0,
+    "truth": 8079154.0
+   },
+   "time": {
+    "days_compared": 959,
+    "within5_naive": 0.933264,
+    "within5_rebuilt": 0.990615,
+    "misses_rebuilt": 9,
+    "misses_near_change": 9
+   },
+   "sleep": {
+    "nights": 796,
+    "longest_source_h": 8.162332,
+    "analyzer_h": 7.00557,
+    "truth_h": 7.00557
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 123,
+    "median_samples": 4.0,
+    "analyzer_blank": 123
+   },
+   "partial_wear": {
+    "days": 106,
+    "excluded": 106
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 5,
+    "survivors_planted": false,
+    "survivors": [
+     {
+      "x": "steps",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.093435,
+      "q": 0.0555,
+      "planted": false
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.336148,
+      "q": 5.39e-19,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.316515,
+      "q": 6.03e-17,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.335799,
+      "q": 5.39e-19,
+      "planted": true
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.337931,
+      "q": 2.01e-16,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 2,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 13853369.0,
+    "recovered": 8035903.0,
+    "truth": 8035903.0
+   },
+   "time": {
+    "days_compared": 963,
+    "within5_naive": 0.930426,
+    "within5_rebuilt": 0.990654,
+    "misses_rebuilt": 9,
+    "misses_near_change": 9
+   },
+   "sleep": {
+    "nights": 791,
+    "longest_source_h": 8.102739,
+    "analyzer_h": 6.941846,
+    "truth_h": 6.941846
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 121,
+    "median_samples": 4.0,
+    "analyzer_blank": 121
+   },
+   "partial_wear": {
+    "days": 122,
+    "excluded": 122
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 4,
+    "survivors_planted": true,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.341431,
+      "q": 7.77e-20,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.306804,
+      "q": 3.64e-16,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.345527,
+      "q": 5.03e-20,
+      "planted": true
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.357359,
+      "q": 1.64e-18,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 3,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 14125516.0,
+    "recovered": 8104160.0,
+    "truth": 8104160.0
+   },
+   "time": {
+    "days_compared": 964,
+    "within5_naive": 0.945021,
+    "within5_rebuilt": 0.991701,
+    "misses_rebuilt": 8,
+    "misses_near_change": 8
+   },
+   "sleep": {
+    "nights": 823,
+    "longest_source_h": 8.184002,
+    "analyzer_h": 7.023876,
+    "truth_h": 7.023876
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 131,
+    "median_samples": 4.0,
+    "analyzer_blank": 131
+   },
+   "partial_wear": {
+    "days": 96,
+    "excluded": 96
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 5,
+    "survivors_planted": false,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.298342,
+      "q": 2.15e-15,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.354051,
+      "q": 1.73e-21,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.298638,
+      "q": 2.15e-15,
+      "planted": true
+     },
+     {
+      "x": "sleep_eff",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.096208,
+      "q": 0.0692,
+      "planted": false
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.287307,
+      "q": 9e-13,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 4,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 13801627.0,
+    "recovered": 8017935.0,
+    "truth": 8017935.0
+   },
+   "time": {
+    "days_compared": 960,
+    "within5_naive": 0.919792,
+    "within5_rebuilt": 0.989583,
+    "misses_rebuilt": 10,
+    "misses_near_change": 10
+   },
+   "sleep": {
+    "nights": 789,
+    "longest_source_h": 8.155429,
+    "analyzer_h": 6.99512,
+    "truth_h": 6.99512
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 119,
+    "median_samples": 4.0,
+    "analyzer_blank": 119
+   },
+   "partial_wear": {
+    "days": 113,
+    "excluded": 113
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 4,
+    "survivors_planted": true,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.303768,
+      "q": 7.4e-16,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.347161,
+      "q": 2.6e-20,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.305322,
+      "q": 7.4e-16,
+      "planted": true
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.309882,
+      "q": 3.57e-14,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 5,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 14027260.0,
+    "recovered": 8080260.0,
+    "truth": 8080260.0
+   },
+   "time": {
+    "days_compared": 973,
+    "within5_naive": 0.930113,
+    "within5_rebuilt": 0.99075,
+    "misses_rebuilt": 9,
+    "misses_near_change": 9
+   },
+   "sleep": {
+    "nights": 812,
+    "longest_source_h": 8.166318,
+    "analyzer_h": 7.004762,
+    "truth_h": 7.004762
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 119,
+    "median_samples": 4.0,
+    "analyzer_blank": 119
+   },
+   "partial_wear": {
+    "days": 103,
+    "excluded": 102
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 4,
+    "survivors_planted": true,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.361709,
+      "q": 2.7e-23,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.315502,
+      "q": 8.48e-18,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.361628,
+      "q": 2.7e-23,
+      "planted": true
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.376435,
+      "q": 2e-21,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 6,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 14029476.0,
+    "recovered": 8085581.0,
+    "truth": 8085581.0
+   },
+   "time": {
+    "days_compared": 968,
+    "within5_naive": 0.929752,
+    "within5_rebuilt": 0.990702,
+    "misses_rebuilt": 9,
+    "misses_near_change": 9
+   },
+   "sleep": {
+    "nights": 818,
+    "longest_source_h": 8.174205,
+    "analyzer_h": 7.017339,
+    "truth_h": 7.017339
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 128,
+    "median_samples": 4.0,
+    "analyzer_blank": 128
+   },
+   "partial_wear": {
+    "days": 83,
+    "excluded": 83
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 4,
+    "survivors_planted": true,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.336851,
+      "q": 7.71e-20,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.319614,
+      "q": 6.58e-18,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.337252,
+      "q": 7.71e-20,
+      "planted": true
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.339969,
+      "q": 6.58e-18,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 7,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 14088485.0,
+    "recovered": 8098103.0,
+    "truth": 8098103.0
+   },
+   "time": {
+    "days_compared": 975,
+    "within5_naive": 0.934359,
+    "within5_rebuilt": 0.990769,
+    "misses_rebuilt": 9,
+    "misses_near_change": 9
+   },
+   "sleep": {
+    "nights": 811,
+    "longest_source_h": 8.169955,
+    "analyzer_h": 7.010214,
+    "truth_h": 7.010214
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 125,
+    "median_samples": 4.0,
+    "analyzer_blank": 125
+   },
+   "partial_wear": {
+    "days": 110,
+    "excluded": 110
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 4,
+    "survivors_planted": true,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.315328,
+      "q": 2.67e-17,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.366247,
+      "q": 7.44e-23,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.317271,
+      "q": 2.5e-17,
+      "planted": true
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.32559,
+      "q": 2.72e-16,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 8,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 14042347.0,
+    "recovered": 8052069.0,
+    "truth": 8052069.0
+   },
+   "time": {
+    "days_compared": 983,
+    "within5_naive": 0.92472,
+    "within5_rebuilt": 0.990844,
+    "misses_rebuilt": 9,
+    "misses_near_change": 9
+   },
+   "sleep": {
+    "nights": 819,
+    "longest_source_h": 8.128287,
+    "analyzer_h": 6.96805,
+    "truth_h": 6.96805
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 121,
+    "median_samples": 4.0,
+    "analyzer_blank": 121
+   },
+   "partial_wear": {
+    "days": 103,
+    "excluded": 103
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 4,
+    "survivors_planted": true,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.326501,
+      "q": 4.14e-19,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.33941,
+      "q": 4.07e-20,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.327622,
+      "q": 4.14e-19,
+      "planted": true
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.33872,
+      "q": 5.16e-18,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 9,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 13948055.0,
+    "recovered": 8056470.0,
+    "truth": 8056470.0
+   },
+   "time": {
+    "days_compared": 962,
+    "within5_naive": 0.954262,
+    "within5_rebuilt": 0.990644,
+    "misses_rebuilt": 9,
+    "misses_near_change": 9
+   },
+   "sleep": {
+    "nights": 805,
+    "longest_source_h": 8.183975,
+    "analyzer_h": 7.023665,
+    "truth_h": 7.023665
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 117,
+    "median_samples": 4.0,
+    "analyzer_blank": 117
+   },
+   "partial_wear": {
+    "days": 110,
+    "excluded": 110
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 4,
+    "survivors_planted": true,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.336196,
+      "q": 5.31e-20,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.261927,
+      "q": 2.69e-12,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.335919,
+      "q": 5.31e-20,
+      "planted": true
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.329874,
+      "q": 7.78e-17,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 10,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 14075334.0,
+    "recovered": 8090491.0,
+    "truth": 8090491.0
+   },
+   "time": {
+    "days_compared": 964,
+    "within5_naive": 0.940871,
+    "within5_rebuilt": 0.990664,
+    "misses_rebuilt": 9,
+    "misses_near_change": 9
+   },
+   "sleep": {
+    "nights": 820,
+    "longest_source_h": 8.188191,
+    "analyzer_h": 7.029024,
+    "truth_h": 7.029024
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 124,
+    "median_samples": 4.0,
+    "analyzer_blank": 124
+   },
+   "partial_wear": {
+    "days": 95,
+    "excluded": 94
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 4,
+    "survivors_planted": true,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.293564,
+      "q": 2.83e-15,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.339805,
+      "q": 6.41e-20,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.294631,
+      "q": 2.83e-15,
+      "planted": true
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.314189,
+      "q": 2.17e-15,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 11,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 14017230.0,
+    "recovered": 8099532.0,
+    "truth": 8099532.0
+   },
+   "time": {
+    "days_compared": 971,
+    "within5_naive": 0.928939,
+    "within5_rebuilt": 0.991761,
+    "misses_rebuilt": 8,
+    "misses_near_change": 8
+   },
+   "sleep": {
+    "nights": 796,
+    "longest_source_h": 8.140222,
+    "analyzer_h": 6.981491,
+    "truth_h": 6.981491
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 121,
+    "median_samples": 4.0,
+    "analyzer_blank": 121
+   },
+   "partial_wear": {
+    "days": 120,
+    "excluded": 120
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 4,
+    "survivors_planted": true,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.336369,
+      "q": 1.65e-19,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.360567,
+      "q": 3.78e-22,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.335804,
+      "q": 1.65e-19,
+      "planted": true
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.33331,
+      "q": 2.02e-16,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 12,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 13834161.0,
+    "recovered": 8044360.0,
+    "truth": 8044360.0
+   },
+   "time": {
+    "days_compared": 970,
+    "within5_naive": 0.929897,
+    "within5_rebuilt": 0.991753,
+    "misses_rebuilt": 8,
+    "misses_near_change": 8
+   },
+   "sleep": {
+    "nights": 783,
+    "longest_source_h": 8.1841,
+    "analyzer_h": 7.026501,
+    "truth_h": 7.026501
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 123,
+    "median_samples": 4.0,
+    "analyzer_blank": 123
+   },
+   "partial_wear": {
+    "days": 129,
+    "excluded": 129
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 5,
+    "survivors_planted": false,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.363268,
+      "q": 9.34e-23,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.300217,
+      "q": 1.26e-15,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.363995,
+      "q": 9.34e-23,
+      "planted": true
+     },
+     {
+      "x": "sleep_hr",
+      "y": "hrv_sdnn",
+      "lag": 0,
+      "r": 0.154675,
+      "q": 0.00061,
+      "planted": false
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.350121,
+      "q": 4.33e-18,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 13,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 14119738.0,
+    "recovered": 8077379.0,
+    "truth": 8077379.0
+   },
+   "time": {
+    "days_compared": 969,
+    "within5_naive": 0.956656,
+    "within5_rebuilt": 0.993808,
+    "misses_rebuilt": 6,
+    "misses_near_change": 6
+   },
+   "sleep": {
+    "nights": 820,
+    "longest_source_h": 8.159533,
+    "analyzer_h": 7.000203,
+    "truth_h": 7.000203
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 129,
+    "median_samples": 4.0,
+    "analyzer_blank": 129
+   },
+   "partial_wear": {
+    "days": 114,
+    "excluded": 114
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 4,
+    "survivors_planted": true,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.347255,
+      "q": 5.84e-20,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.325572,
+      "q": 7.05e-18,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.3477,
+      "q": 5.84e-20,
+      "planted": true
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.348846,
+      "q": 9.86e-19,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 14,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 13846307.0,
+    "recovered": 8030780.0,
+    "truth": 8030780.0
+   },
+   "time": {
+    "days_compared": 970,
+    "within5_naive": 0.928866,
+    "within5_rebuilt": 0.990722,
+    "misses_rebuilt": 9,
+    "misses_near_change": 9
+   },
+   "sleep": {
+    "nights": 787,
+    "longest_source_h": 8.15432,
+    "analyzer_h": 6.993329,
+    "truth_h": 6.993329
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 122,
+    "median_samples": 4.0,
+    "analyzer_blank": 122
+   },
+   "partial_wear": {
+    "days": 136,
+    "excluded": 136
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 5,
+    "survivors_planted": false,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.299528,
+      "q": 3.87e-15,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.382277,
+      "q": 1.85e-24,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.300951,
+      "q": 3.87e-15,
+      "planted": true
+     },
+     {
+      "x": "bed_clock_adj",
+      "y": "steps",
+      "lag": 1,
+      "r": 0.084,
+      "q": 0.0376,
+      "planted": false
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.303016,
+      "q": 3.13e-13,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 15,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 13953804.0,
+    "recovered": 8083321.0,
+    "truth": 8083321.0
+   },
+   "time": {
+    "days_compared": 960,
+    "within5_naive": 0.920833,
+    "within5_rebuilt": 0.99375,
+    "misses_rebuilt": 6,
+    "misses_near_change": 6
+   },
+   "sleep": {
+    "nights": 796,
+    "longest_source_h": 8.143488,
+    "analyzer_h": 6.987332,
+    "truth_h": 6.987332
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 116,
+    "median_samples": 4.0,
+    "analyzer_blank": 116
+   },
+   "partial_wear": {
+    "days": 108,
+    "excluded": 108
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 6,
+    "survivors_planted": false,
+    "survivors": [
+     {
+      "x": "steps",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.097621,
+      "q": 0.0354,
+      "planted": false
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.309129,
+      "q": 1.08e-15,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.289464,
+      "q": 2.93e-14,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.308348,
+      "q": 1.08e-15,
+      "planted": true
+     },
+     {
+      "x": "asleep_watch_h",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.123177,
+      "q": 0.00947,
+      "planted": false
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.319995,
+      "q": 2.8e-15,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 16,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 14022466.0,
+    "recovered": 8079607.0,
+    "truth": 8079607.0
+   },
+   "time": {
+    "days_compared": 969,
+    "within5_naive": 0.937049,
+    "within5_rebuilt": 0.98968,
+    "misses_rebuilt": 10,
+    "misses_near_change": 10
+   },
+   "sleep": {
+    "nights": 806,
+    "longest_source_h": 8.124648,
+    "analyzer_h": 6.965964,
+    "truth_h": 6.965964
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 124,
+    "median_samples": 4.0,
+    "analyzer_blank": 124
+   },
+   "partial_wear": {
+    "days": 113,
+    "excluded": 113
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 4,
+    "survivors_planted": true,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.275093,
+      "q": 8.18e-13,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.402007,
+      "q": 1.09e-27,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.273633,
+      "q": 8.18e-13,
+      "planted": true
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.272918,
+      "q": 2.89e-11,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 17,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 13991112.0,
+    "recovered": 8088038.0,
+    "truth": 8088038.0
+   },
+   "time": {
+    "days_compared": 967,
+    "within5_naive": 0.941055,
+    "within5_rebuilt": 0.990693,
+    "misses_rebuilt": 9,
+    "misses_near_change": 9
+   },
+   "sleep": {
+    "nights": 801,
+    "longest_source_h": 8.168123,
+    "analyzer_h": 7.005576,
+    "truth_h": 7.005576
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 124,
+    "median_samples": 4.0,
+    "analyzer_blank": 124
+   },
+   "partial_wear": {
+    "days": 117,
+    "excluded": 117
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 4,
+    "survivors_planted": true,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.30158,
+      "q": 1.93e-15,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.366172,
+      "q": 2.27e-22,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.302588,
+      "q": 1.93e-15,
+      "planted": true
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.311927,
+      "q": 4.32e-14,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 18,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 14010543.0,
+    "recovered": 8067076.0,
+    "truth": 8067076.0
+   },
+   "time": {
+    "days_compared": 970,
+    "within5_naive": 0.942268,
+    "within5_rebuilt": 0.989691,
+    "misses_rebuilt": 10,
+    "misses_near_change": 10
+   },
+   "sleep": {
+    "nights": 806,
+    "longest_source_h": 8.163503,
+    "analyzer_h": 7.005045,
+    "truth_h": 7.005045
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 123,
+    "median_samples": 4.0,
+    "analyzer_blank": 123
+   },
+   "partial_wear": {
+    "days": 118,
+    "excluded": 118
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 4,
+    "survivors_planted": true,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.350506,
+      "q": 2.24e-21,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.312658,
+      "q": 4.29e-17,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.352913,
+      "q": 2.24e-21,
+      "planted": true
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.342748,
+      "q": 7.73e-18,
+      "planted": true
+     }
+    ]
+   }
+  },
+  {
+   "seed": 19,
+   "days": 1095,
+   "steps": {
+    "plain_sum": 14070612.0,
+    "recovered": 8100001.0,
+    "truth": 8100001.0
+   },
+   "time": {
+    "days_compared": 968,
+    "within5_naive": 0.938017,
+    "within5_rebuilt": 0.992769,
+    "misses_rebuilt": 7,
+    "misses_near_change": 7
+   },
+   "sleep": {
+    "nights": 813,
+    "longest_source_h": 8.181857,
+    "analyzer_h": 7.022858,
+    "truth_h": 7.022858
+   },
+   "gaps": {
+    "days": 5,
+    "analyzer_null": 5
+   },
+   "sparse_runs": {
+    "runs": 121,
+    "median_samples": 4.0,
+    "analyzer_blank": 121
+   },
+   "partial_wear": {
+    "days": 106,
+    "excluded": 106
+   },
+   "family": {
+    "tested": 33,
+    "surviving": 5,
+    "survivors_planted": false,
+    "survivors": [
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.299458,
+      "q": 1.26e-15,
+      "planted": true
+     },
+     {
+      "x": "run_mi",
+      "y": "rhr",
+      "lag": 2,
+      "r": -0.348125,
+      "q": 6.27e-21,
+      "planted": true
+     },
+     {
+      "x": "workout_min",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.301207,
+      "q": 1.26e-15,
+      "planted": true
+     },
+     {
+      "x": "asleep_watch_h",
+      "y": "workout_min",
+      "lag": 1,
+      "r": 0.097614,
+      "q": 0.0394,
+      "planted": false
+     },
+     {
+      "x": "active_kcal_worn",
+      "y": "rhr",
+      "lag": 1,
+      "r": -0.303524,
+      "q": 1.27e-14,
+      "planted": true
+     }
+    ]
+   }
+  }
+ ]
+}

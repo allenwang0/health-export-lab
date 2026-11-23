@@ -2,16 +2,21 @@
 
 A local analyzer for Apple Health exports that fixes what the raw export gets wrong before running any statistics. Sum the steps naively and you count iPhone and Watch twice; read the timestamps literally and trips land in the wrong time zone.
 
-![Report built from the synthetic export](docs/report.png)
+**[Read the report →](https://allenwang0.github.io/health-export-lab/)**
 
-All screenshots and numbers come from a synthetic export with known answers, not real health data.
+[![The report's opening view](docs/report.png)](https://allenwang0.github.io/health-export-lab/)
+
+All numbers and screenshots come from synthetic exports with planted answers, not real health data.
 
 ## Highlights
 
-- Steps counted once: a plain sum gives 13,913,705 steps; removing iPhone and Watch overlap recovers the true 8,047,907 exactly.
-- Local time rebuilt hour by hour: days matching Apple's own daily totals go from 92.6% to 99.2%.
-- Every fix is proven necessary: reverting each of 14 fixes, one at a time, makes a test fail.
-- Streams the export zip without extracting it and parses a synthetic 1,000,000-record export in about 10 s on a laptop.
+<!-- results:start -->
+- Steps counted once: a plain sum overcounts by 73%; removing iPhone and Watch overlap recovers the planted 8,047,907 exactly, on 20 of 20 seeds.
+- Local time rebuilt: days within 5% of Apple's totals go from 92.6% to 99.2% (seed 0).
+- 14 of 14 fixes guarded: reverting any one makes a test fail.
+- 1,000,000 synthetic records parse in 5.7 s (median of 5, Apple M5 Pro).
+- On seed 0, the 4 of 33 tests surviving correction are all the planted effect.
+<!-- results:end -->
 
 ## Run it
 
@@ -22,18 +27,20 @@ make setup                        # virtualenv with pinned dependencies
 make demo                         # synthetic export, served at http://127.0.0.1:8877
 make test
 ./run.sh ~/Downloads/export.zip   # your own export from the Health app
+make report                       # rebuild report/ from the committed results/
 ```
 
 ## How it works
 
-- Parses the export zip as a stream and keeps every value as raw text.
-- Rebuilds local time from Apple's time-zone tags, since every record carries the offset from the day you exported.
+- Streams the export zip and keeps every value as raw text.
+- Rebuilds local time from Apple's time-zone tags; every record carries the export day's offset.
 - Removes overlap between sources in priority order (Watch, iPhone, other apps) and picks one sleep source per night.
 - Treats days with no data as unknown, never zero.
-- Runs a fixed set of statistical tests chosen in advance and corrects for testing many at once; all 4 that survive reflect the one effect the generator planted.
+- Runs tests chosen in advance, with Benjamini–Hochberg correction.
 
 ## Limitations
 
-- Runs locally, nothing uploaded: the server only answers on 127.0.0.1 and your original export is never modified.
+- Synthetic data only: exactness on real exports is not measured.
+- Local only: the server answers on 127.0.0.1 and never modifies your export.
 - Time-zone changes are placed to within about a day.
-- Questions are matched by rules, not a language model, so only a fixed set of question shapes works.
+- Questions are matched by rules, not a language model.

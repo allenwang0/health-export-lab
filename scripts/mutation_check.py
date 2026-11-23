@@ -71,7 +71,7 @@ def main():
     out = Path(ap.parse_args().out)
     rows = []
     with tempfile.TemporaryDirectory() as tmp:
-        for part in ("healthlab", "tests", "pyproject.toml"):
+        for part in ("healthlab", "tests", "results", "pyproject.toml"):
             src = ROOT / part
             (shutil.copytree if src.is_dir() else shutil.copy)(src, Path(tmp) / part)
         if pytest(tmp, "") != 0:

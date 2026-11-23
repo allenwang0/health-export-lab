@@ -8,6 +8,8 @@ jobs:
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # build_report.py links evidence to the commit that last changed each file
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -17,11 +19,35 @@ jobs:
       - run: make lint
       - run: make test
       - run: make mutants
-      - run: make report
+      - name: Report kit matches its pinned hashes
+        run: python report-kit/check_kit.py
+      - name: Committed report, card, README highlights and mutants are current
+        run: |
+          make report
+          git diff --exit-code -- report site README.md results/mutants.json
       - uses: actions/upload-artifact@v4
         with:
           name: synthetic-report
           path: |
-            report/index.html
+            report/
             site/card.json
-            results/mutants.json
+            results/
+      # Pages publishes report/ exactly as committed: built from committed results/, never re-run here.
+      - uses: actions/upload-pages-artifact@v3
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        with:
+          path: report
+
+  deploy-pages:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [test]
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

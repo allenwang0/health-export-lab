@@ -1,9 +1,9 @@
 {
  "schema_version": 1,
  "repo": "health-export-lab",
- "sha": "9c54d34df0f1e626cd1689fc928067b2597950bb",
- "generated_at": "2026-11-12T06:06:29Z",
- "command": "python scripts/report.py",
+ "sha": "c67b786fec74b0eb08b7d4600511b5ffee718cac",
+ "generated_at": "2026-11-23T04:51:14Z",
+ "command": "python scripts/report.py && python3 scripts/build_report.py",
  "data_note": "SYNTHETIC Apple Health export from healthlab/synth.py, seed 0, 1095 days (2022-01-03 to 2025-01-01). No real health data.",
  "metric": {
   "label": "Days within 5% of Apple's daily active energy, rebuilt local time",
@@ -11,7 +11,7 @@
   "unit": "%",
   "higher_is_better": true
  },
- "takeaway": "Rebuilt local time matches Apple's daily total within 5% on 99.2% of days, against 92.6% with the export offset.",
+ "takeaway": "A plain sum overstates steps by 73%; healthlab recovers the planted total exactly (synthetic, seed 0).",
  "chart": {
   "type": "line",
   "x_label": "Week",
@@ -27,7 +27,7 @@
     "points": [
      [
       "2022-04-03",
-      3.32
+      3.31
      ],
      [
       "2022-04-10",
@@ -251,7 +251,7 @@
      ],
      [
       "2023-04-30",
-      1.35
+      1.34
      ],
      [
       "2023-05-07",
@@ -431,7 +431,7 @@
      ],
      [
       "2024-03-10",
-      0.09
+      0.11
      ],
      [
       "2024-03-17",
@@ -1013,7 +1013,7 @@
      ],
      [
       "2024-03-10",
-      0.56
+      0.36
      ],
      [
       "2024-03-17",
