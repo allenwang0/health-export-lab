@@ -1,26 +1,137 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
-<title>Health Lab synthetic report</title><style>
-:root{--bg:#fbfbf9;--fg:#1d1f21;--muted:#5d6166;--grid:#e3e3df;--a:#1f5fa8;--b:#b4561c;--card:#fff}
-@media (prefers-color-scheme:dark){:root{--bg:#141517;--fg:#e8e8e6;--muted:#a3a7ad;--grid:#2b2d31;--a:#7fb2ee;--b:#f0a46c;--card:#1c1d20}}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif}
-main{max-width:880px;margin:0 auto;padding:24px 16px 48px}
-.badge{display:inline-block;border:1px solid var(--b);color:var(--b);border-radius:4px;padding:1px 8px;font-size:13px;font-weight:600;letter-spacing:.04em}
-h1{font-size:26px;margin:8px 0 4px}h2{font-size:19px;margin:32px 0 4px}.muted,.note{color:var(--muted)}.take{margin:4px 0 12px}
-.card{background:var(--card);border:1px solid var(--grid);border-radius:8px;padding:12px}
-.chart{width:100%;height:auto}.grid{stroke:var(--grid)}.tick{fill:var(--muted);font-size:12px}.axis{fill:var(--fg);font-size:13px}
-.naive{fill:none;stroke:var(--b);stroke-width:2;stroke-dasharray:6 4}.rebuilt{fill:none;stroke:var(--a);stroke-width:2.5}
-.lab{font-size:13px}.naive-lab{fill:var(--b)}.rebuilt-lab{fill:var(--a)}
-.scroll{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px}th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--grid);vertical-align:top}
-thead th{color:var(--muted);font-weight:600}code{font-size:13px}
-</style></head><body><main>
-<span class=badge>SYNTHETIC DATA</span>
-<h1>Health Lab: the export traps, measured</h1>
-<p class=muted>SYNTHETIC Apple Health export from healthlab/synth.py, seed 0, 1095 days (2022-01-03 to 2025-01-01). No real health data. Generated 2026-11-12 06:06 UTC at commit <code>9c54d34df0</code> by <code>python scripts/report.py</code>.</p>
-<h2 id=t1>Rebuilding local time against Apple's own daily totals</h2>
-<p class=take>Rebuilt local time matches Apple&#x27;s daily total within 5% on 99.2% of days, against 92.6% with the export offset. Weekly mean error peaks at 171 kcal a day with the export offset (week of Mar 17, 2024), against 48 kcal after the rebuild.</p>
-<div class=card><p class=note><span class=badge>SYNTHETIC</span> Dashed: days cut at the -0700 export offset. Solid: days cut at the zone rebuilt from HKTimeZone tags.</p><svg viewBox="0 0 720 320" role="img" aria-labelledby="t1" class="chart"><line x1="56" x2="600" y1="276.0" y2="276.0" class="grid"/><text x="50" y="280.0" text-anchor="end" class="tick">0</text><line x1="56" x2="600" y1="211.0" y2="211.0" class="grid"/><text x="50" y="215.0" text-anchor="end" class="tick">50</text><line x1="56" x2="600" y1="146.0" y2="146.0" class="grid"/><text x="50" y="150.0" text-anchor="end" class="tick">100</text><line x1="56" x2="600" y1="81.0" y2="81.0" class="grid"/><text x="50" y="85.0" text-anchor="end" class="tick">150</text><line x1="56" x2="600" y1="16.0" y2="16.0" class="grid"/><text x="50" y="20.0" text-anchor="end" class="tick">200</text><text x="71.2" y="294" text-anchor="middle" class="tick">May 2022</text><text x="171.2" y="294" text-anchor="middle" class="tick">Nov 2022</text><text x="269.6" y="294" text-anchor="middle" class="tick">May 2023</text><text x="369.6" y="294" text-anchor="middle" class="tick">Nov 2023</text><text x="468.5" y="294" text-anchor="middle" class="tick">May 2024</text><text x="568.5" y="294" text-anchor="middle" class="tick">Nov 2024</text><text x="328.0" y="314" text-anchor="middle" class="axis">Week (synthetic dates)</text><text transform="translate(14 146.0) rotate(-90)" text-anchor="middle" class="axis">Mean daily error (kcal)</text><polyline points="56.0,271.7 59.8,274.1 63.6,270.8 67.4,271.3 71.2,272.0 75.0,274.2 78.8,273.4 82.6,271.2 86.4,271.6 90.2,271.3 94.0,273.2 97.8,271.9 101.7,272.0 105.5,271.6 109.3,274.0 113.1,274.2 116.9,270.5 120.7,273.8 124.5,270.0 128.3,271.5 132.1,272.2 135.9,270.4 139.7,272.3 143.5,273.9 147.3,274.0 151.1,271.9 154.9,272.5 158.7,273.7 162.5,273.4 166.3,273.6 170.1,273.6 173.9,270.5 177.7,273.4 181.5,273.1 185.3,273.2 189.1,274.0 193.0,273.4 196.8,272.3 200.6,274.3 204.4,273.1 208.2,274.7 212.0,273.9 215.8,272.3 219.6,272.4 223.4,274.1 227.2,273.6 231.0,273.2 234.8,272.5 238.6,273.3 242.4,271.9 246.2,270.6 250.0,271.3 253.8,275.2 257.6,273.9 261.4,274.1 265.2,273.4 269.0,274.3 272.8,274.9 276.6,273.9 280.4,274.0 284.3,274.0 288.1,273.1 291.9,274.5 295.7,273.7 299.5,273.9 303.3,274.3 307.1,274.2 310.9,275.3 314.7,273.8 318.5,274.7 322.3,274.4 326.1,274.6 329.9,274.3 333.7,274.3 337.5,237.2 341.3,236.3 345.1,273.2 348.9,272.9 352.7,274.6 356.5,274.8 360.3,274.3 364.1,274.6 367.9,274.2 371.7,273.6 375.6,276.0 379.4,276.0 383.2,276.0 387.0,276.0 390.8,276.0 394.6,276.0 398.4,276.0 402.2,276.0 406.0,276.0 409.8,276.0 413.6,276.0 417.4,276.0 421.2,276.0 425.0,276.0 428.8,276.0 432.6,276.0 436.4,276.0 440.2,275.9 444.0,53.1 447.8,247.7 451.6,273.7 455.4,273.8 459.2,275.0 463.0,275.1 466.9,275.0 470.7,274.3 474.5,273.9 478.3,275.1 482.1,273.9 485.9,275.1 489.7,275.1 493.5,274.9 497.3,274.1 501.1,273.2 504.9,274.0 508.7,274.1 512.5,273.3 516.3,273.3 520.1,274.5 523.9,273.7 527.7,274.2 531.5,273.4 535.3,273.7 539.1,272.9 542.9,274.3 546.7,274.6 550.5,272.8 554.3,273.8 558.2,273.9 562.0,274.4 565.8,273.9 569.6,274.7 573.4,276.0 577.2,276.0 581.0,276.0 584.8,276.0 588.6,276.0 592.4,276.0 596.2,276.0 600.0,276.0" class="naive"/><text x="606" y="270.0" class="lab naive-lab">Export offset</text><polyline points="56.0,276.0 59.8,276.0 63.6,276.0 67.4,276.0 71.2,276.0 75.0,276.0 78.8,276.0 82.6,276.0 86.4,276.0 90.2,276.0 94.0,276.0 97.8,276.0 101.7,276.0 105.5,276.0 109.3,276.0 113.1,276.0 116.9,276.0 120.7,276.0 124.5,276.0 128.3,276.0 132.1,276.0 135.9,276.0 139.7,276.0 143.5,276.0 147.3,276.0 151.1,276.0 154.9,276.0 158.7,276.0 162.5,276.0 166.3,276.0 170.1,276.0 173.9,276.0 177.7,276.0 181.5,276.0 185.3,276.0 189.1,276.0 193.0,276.0 196.8,276.0 200.6,276.0 204.4,276.0 208.2,276.0 212.0,276.0 215.8,276.0 219.6,276.0 223.4,276.0 227.2,276.0 231.0,276.0 234.8,276.0 238.6,276.0 242.4,275.1 246.2,276.0 250.0,276.0 253.8,267.7 257.6,276.0 261.4,276.0 265.2,276.0 269.0,276.0 272.8,276.0 276.6,276.0 280.4,276.0 284.3,276.0 288.1,276.0 291.9,276.0 295.7,276.0 299.5,276.0 303.3,276.0 307.1,276.0 310.9,276.0 314.7,276.0 318.5,276.0 322.3,276.0 326.1,276.0 329.9,276.0 333.7,276.0 337.5,276.0 341.3,276.0 345.1,214.6 348.9,276.0 352.7,276.0 356.5,276.0 360.3,276.0 364.1,276.0 367.9,276.0 371.7,276.0 375.6,276.0 379.4,276.0 383.2,276.0 387.0,276.0 390.8,276.0 394.6,276.0 398.4,276.0 402.2,276.0 406.0,276.0 409.8,276.0 413.6,276.0 417.4,276.0 421.2,276.0 425.0,276.0 428.8,276.0 432.6,276.0 436.4,276.0 440.2,275.3 444.0,213.7 447.8,138.5 451.6,276.0 455.4,276.0 459.2,276.0 463.0,276.0 466.9,276.0 470.7,276.0 474.5,276.0 478.3,276.0 482.1,276.0 485.9,276.0 489.7,276.0 493.5,276.0 497.3,276.0 501.1,276.0 504.9,276.0 508.7,276.0 512.5,276.0 516.3,276.0 520.1,276.0 523.9,276.0 527.7,276.0 531.5,276.0 535.3,276.0 539.1,276.0 542.9,276.0 546.7,276.0 550.5,276.0 554.3,276.0 558.2,276.0 562.0,276.0 565.8,276.0 569.6,276.0 573.4,276.0 577.2,276.0 581.0,276.0 584.8,276.0 588.6,276.0 592.4,276.0 596.2,276.0 600.0,276.0" class="rebuilt"/><text x="606" y="288.0" class="lab rebuilt-lab">Rebuilt local time</text></svg></div>
-<h2>Each trap: the naive answer, the analyzer's answer, the planted truth</h2>
-<p class=take>The analyzer matches the planted truth on every row; the naive answer misses each one.</p>
-<div class=scroll><table><thead><tr><th>Trap</th><th>Naive</th><th>Analyzer</th><th>Planted truth</th></tr></thead><tbody><tr><th scope=row>iPhone and Watch count the same steps</th><td>13,913,705 steps (plain sum)</td><td>8,047,907</td><td>8,047,907</td></tr><tr><th scope=row>Every timestamp carries the -0700 export offset</th><td>92.6% of days match Apple&#x27;s total</td><td>99.2%</td><td>100%; 8 of the 8 rebuilt misses fall within 2 days of a zone change</td></tr><tr><th scope=row>Three sources score each Watch night</th><td>8.14 h (longest source)</td><td>6.98 h</td><td>6.98 h</td></tr><tr><th scope=row>Days with no data at all</th><td>5 days of 0 steps</td><td>5 days NULL</td><td>5 unknown days</td></tr><tr><th scope=row>Older runs keep only a few heart-rate samples</th><td>124 runs averaged from 4 samples</td><td>124 runs left blank</td><td>124 runs with no reliable average</td></tr><tr><th scope=row>Zones change with a move, two trips and an alias</th><td>1 zone (-0700 throughout)</td><td>6 zone segments</td><td>6 tagged eras, after 1 untagged era shown as assumed</td></tr><tr><th scope=row>Watch worn only part of the day</th><td>113 partial days counted as worn</td><td>113 of them excluded from worn-day series</td><td>113 partial days</td></tr></tbody></table></div>
-<h2>Each fix is guarded by a test</h2><p class=take>14 of 14 mutants killed: removing any one fix makes its test fail (<code>scripts/mutation_check.py</code>).</p><div class=scroll><table><thead><tr><th>Fix removed</th><th>Test</th><th>Result</th></tr></thead><tbody><tr><th scope=row>Use the export offset for every hour</th><td><code>test_local_time_is_rebuilt_from_zone_tags_not_the_export_offset</code></td><td>killed</td></tr><tr><th scope=row>One fixed offset per zone, ignoring DST</th><td><code>test_each_hour_uses_its_own_dst_offset</code></td><td>killed</td></tr><tr><th scope=row>Treat zone aliases as different places</th><td><code>test_zone_aliases_merge_into_one_place</code></td><td>killed</td></tr><tr><th scope=row>Present untagged days as observed</th><td><code>test_days_before_the_first_zone_tag_are_marked_assumed</code></td><td>killed</td></tr><tr><th scope=row>Sum steps across sources</th><td><code>test_iphone_and_watch_steps_are_not_double_counted</code></td><td>killed</td></tr><tr><th scope=row>Fill missing days with zero</th><td><code>test_a_day_without_samples_is_null_not_zero</code></td><td>killed</td></tr><tr><th scope=row>Longest sleep source wins</th><td><code>test_one_sleep_source_per_night_named_and_never_blended</code></td><td>killed</td></tr><tr><th scope=row>Key a night by the date it started</th><td><code>test_one_sleep_source_per_night_named_and_never_blended</code></td><td>killed</td></tr><tr><th scope=row>Match device names on a plain space</th><td><code>test_device_names_with_a_non_breaking_space_still_match</code></td><td>killed</td></tr><tr><th scope=row>Hard-code the sleep tracking dates</th><td><code>test_sleep_tracking_and_stage_dates_come_from_the_data</code></td><td>killed</td></tr><tr><th scope=row>Count any heart-rate hour as a worn day</th><td><code>test_partial_wear_days_are_not_treated_as_worn</code></td><td>killed</td></tr><tr><th scope=row>Average a handful of workout samples</th><td><code>test_sparse_workout_heart_rate_is_left_blank</code></td><td>killed</td></tr><tr><th scope=row>Count Correlation members as samples</th><td><code>test_correlation_members_are_not_counted_as_samples</code></td><td>killed</td></tr><tr><th scope=row>Append every import without matching</th><td><code>test_importing_an_overlapping_export_again_adds_nothing</code></td><td>killed</td></tr></tbody></table></div>
-</main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Apple Health export traps · Allen Wang</title>
+<meta name="description" content="On a synthetic Apple Health export, rebuilding local time matches Apple's daily totals on 99.2 % of days, up from 92.6 %.">
+<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0b0b0b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="data:,">
+<script>try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<link rel="stylesheet" href="kit/report.css">
+<style>
+/* report.local */
+.hero-fig{margin-top:40px;max-width:760px}
+.tablewrap td{white-space:normal;min-width:7em}
+#traps .tablewrap td,#traps .tablewrap th,#reproduce .tablewrap td{text-align:left}
+.s>.rk-table{margin-top:24px}
+.bento .card .cmp{margin-bottom:12px}
+/* The trap scoreboard stacks into one block per trap on phones instead of scrolling sideways. */
+@media (max-width:599px){[data-stack] thead{display:none}[data-stack] tr,[data-stack] th,[data-stack] td{display:block;position:static;white-space:normal;text-align:left!important;border:0}
+[data-stack] tr{border-top:1px solid var(--hairline);padding:8px 0}[data-stack] th{padding:4px 12px}
+[data-stack] td{display:grid;grid-template-columns:7.5em 1fr;gap:8px;padding:2px 12px}[data-stack] td::before{content:attr(data-label);color:var(--ink-3)}}
+/* charts.js never draws narrower than 260 px; keep plots >= 260 px at 320 px so text stays >= 11 px */
+</style>
+<script src="kit/report.js" defer></script>
+<script src="kit/charts.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="bar"><div class="wrap">
+  <a class="back" href="https://allenwang0.github.io/">← Allen Wang</a>
+  <span class="title" aria-hidden="true">Apple Health export traps</span>
+  <a class="pill" href="https://github.com/allenwang0/health-export-lab">Code ↗</a>
+</div></header>
+<main id="main">
+<section class="hero wrap" aria-labelledby="h1">
+  <p class="eyebrow">Data-quality tool · Python</p>
+  <h1 id="h1">Rebuilding local time matches Apple's daily totals on 99.2 % of days, up from 92.6 %</h1>
+  <p class="lede">Apple Health exports stamp every record with the offset from the day you exported, count steps twice and score each night three ways. This analyzer fixes each trap. Here it runs on a synthetic export whose right answers are planted.</p>
+  <p class="conditions"><span class="key">Synthetic export, no real health data</span><span>Seed 0</span><span>1,095 days</span><span>One run</span></p>
+  <figure class="figure hero-fig" aria-labelledby="f-bands">
+    <div class="fig-head"><div><h3 id="f-bands">Days whose active energy matches Apple's own daily total</h3>
+    <p class="sub">Share of 968 days, by error against Apple's daily summary · one synthetic run</p></div><div class="seg" role="radiogroup" aria-label="View" data-view-toggle><button role="radio" aria-checked="true" data-value="chart">Chart</button><button role="radio" aria-checked="false" data-value="table">Table</button></div></div>
+    <div id="c-bands"></div><div class="rk-table" hidden><div class="tablewrap" tabindex="0" role="region" aria-label="Days by error against Apple&#x27;s daily active energy, of 968 days"><table><caption>Days by error against Apple&#x27;s daily active energy, of 968 days</caption><thead><tr><th scope="col">Error</th><th scope="col">Export offset</th><th scope="col">Rebuilt local time</th></tr></thead><tbody><tr><th scope="row">Within 5 % of Apple&#x27;s total</th><td>896 (92.6 %)</td><td>960 (99.2 %)</td></tr><tr><th scope="row">5–25 % off</th><td>53 (5.5 %)</td><td>2 (0.2 %)</td></tr><tr><th scope="row">More than 25 % off</th><td>19 (2.0 %)</td><td>6 (0.6 %)</td></tr></tbody></table></div></div>
+  <figcaption>Each day's hourly active energy is summed by calendar day, either cut at the export's -0700 offset or at the local time rebuilt from the time-zone tags, then compared with the total Apple stored for that day. “Within 5 %” is the match criterion.</figcaption>
+  </figure>
+</section>
+
+<section class="wrap" aria-label="Key results">
+  <div class="bento">
+    <a class="card span-8" href="#timezones"><span class="label">Days within 5 % of Apple's total</span><span class="metric num">99.2 %</span>
+      <span class="cmp">vs 92.6 % with the export offset: 960 vs 896 of 968 days</span><span class="foot">Synthetic export, seed 0 · rebuilt local time</span></a>
+    <a class="card span-4" href="#traps"><span class="label">Steps after removing overlap</span><span class="metric num">8,047,907</span>
+      <span class="cmp">Plain sum: 13,913,705. Planted truth: 8,047,907.</span><span class="foot">iPhone and Watch count the same steps</span></a>
+    <a class="card span-4" href="#traps"><span class="label">Traps recovered exactly</span><span class="metric num">6 of 7</span>
+      <span class="cmp">Time zones: 99.2 % of days match, not 100 %.</span><span class="foot">Against the generator's planted answers</span></a>
+    <a class="card span-4" href="#tests"><span class="label">Fixes guarded by tests</span><span class="metric num">14 of 14</span><span class="cmp">Reverting any one fix makes its test fail.</span><span class="foot">results/mutants.json · mutation check</span></a>
+    <div class="card span-4"><span class="label">Data</span><span class="metric num">Synthetic</span>
+      <span class="cmp">Generated with planted traps. No real health data is in the repo or on this page.</span><span class="foot">healthlab/synth.py · 2022-01-03 to 2025-01-01</span></div>
+  </div>
+</section>
+
+<section class="s wrap" id="traps" aria-labelledby="h-traps">
+  <p class="eyebrow">Each trap · naive vs analyzer vs planted truth</p>
+  <h2 id="h-traps">The analyzer recovers the planted answer on 6 of 7 traps; time zones reach 99.2 % of days, not 100 %</h2>
+  <p class="lede">The naive answer is what you get by reading the export literally. The planted truth is what the generator put in. The time-zone row misses on 8 days; the next section shows where.</p>
+  <div class="rk-table" data-stack><div class="tablewrap" tabindex="0" role="region" aria-label="Each trap on the synthetic export"><table><caption>Each trap on the synthetic export</caption><thead><tr><th scope="col">Trap</th><th scope="col">Naive answer</th><th scope="col">Analyzer</th><th scope="col">Planted truth</th><th scope="col">Matches truth</th></tr></thead><tbody><tr><th scope="row">iPhone and Watch count the same steps</th><td data-label="Naive answer">13,913,705 steps (plain sum)</td><td data-label="Analyzer">8,047,907</td><td data-label="Planted truth">8,047,907</td><td data-label="Matches truth">Yes</td></tr><tr><th scope="row">Every timestamp carries the -0700 export offset</th><td data-label="Naive answer">92.6 % of days match Apple&#x27;s total</td><td data-label="Analyzer">99.2 %</td><td data-label="Planted truth">100 %</td><td data-label="Matches truth">No</td></tr><tr><th scope="row">Three sources score each Watch night</th><td data-label="Naive answer">8.14 h (longest source)</td><td data-label="Analyzer">6.98 h</td><td data-label="Planted truth">6.98 h</td><td data-label="Matches truth">Yes</td></tr><tr><th scope="row">Days with no data at all</th><td data-label="Naive answer">5 days of 0 steps</td><td data-label="Analyzer">5 days NULL</td><td data-label="Planted truth">5 unknown days</td><td data-label="Matches truth">Yes</td></tr><tr><th scope="row">Older runs keep only a few heart-rate samples</th><td data-label="Naive answer">124 runs averaged from 4 samples</td><td data-label="Analyzer">124 runs left blank</td><td data-label="Planted truth">124 runs with no reliable average</td><td data-label="Matches truth">Yes</td></tr><tr><th scope="row">Zones change with a move, two trips and an alias</th><td data-label="Naive answer">1 zone (-0700 throughout)</td><td data-label="Analyzer">6 zone segments</td><td data-label="Planted truth">6 tagged eras, after 1 untagged era shown as assumed</td><td data-label="Matches truth">Yes</td></tr><tr><th scope="row">Watch worn only part of the day</th><td data-label="Naive answer">113 partial days counted as worn</td><td data-label="Analyzer">113 of them excluded from worn-day series</td><td data-label="Planted truth">113 partial days</td><td data-label="Matches truth">Yes</td></tr></tbody></table></div></div>
+  <p class="caveat"><b>The traps and the fixes have the same author.</b> The generator plants the traps the analyzer was written to fix, so a match shows the fixes work on these traps. Real exports may hold traps this generator does not plant.</p>
+</section>
+
+<section class="s wrap" id="timezones" aria-labelledby="h-tz">
+  <p class="eyebrow">Time zones · where the misses are</p>
+  <h2 id="h-tz">The rebuild&#x27;s remaining 8 misses all fall within 1 day of a zone change</h2>
+  <p class="lede">With the export offset, the worst week averages 171 kcal a day of error (week ending Mar 17, 2024). The rebuild cuts that week to 48 kcal, but its own worst week is the next one, week ending Mar 24, 2024, at 106 kcal a day: the error moved by a week, because zone changes are placed to within about a day.</p>
+  <figure class="figure" aria-labelledby="f-miss">
+    <div class="fig-head"><div><h3 id="f-miss">The export offset misses all year; the rebuild misses only next to a move or trip</h3>
+    <p class="sub">Days more than 5 % off Apple's total, by distance to the nearest planted zone change · 6 changes · one synthetic run</p></div><div class="seg" role="radiogroup" aria-label="View" data-view-toggle><button role="radio" aria-checked="true" data-value="chart">Chart</button><button role="radio" aria-checked="false" data-value="table">Table</button></div></div>
+    <div id="c-miss"></div><div class="rk-table" hidden><div class="tablewrap" tabindex="0" role="region" aria-label="Days more than 5 % off Apple&#x27;s total, by distance to the nearest zone change"><table><caption>Days more than 5 % off Apple&#x27;s total, by distance to the nearest zone change</caption><thead><tr><th scope="col">Distance</th><th scope="col">Export offset</th><th scope="col">Rebuilt local time</th></tr></thead><tbody><tr><th scope="row">0–2 days from a zone change</th><td>9</td><td>8</td></tr><tr><th scope="row">3–30 days</th><td>18</td><td>0</td></tr><tr><th scope="row">More than 30 days</th><td>45</td><td>0</td></tr></tbody></table></div></div>
+  <figcaption>Each bar counts the days one method gets more than 5 % wrong, grouped by how far the day is from the nearest zone change (a move, two trips, a return). The export offset is wrong on every day spent outside -0700, so its misses are spread out.</figcaption>
+  </figure>
+</section>
+
+<section class="s wrap" id="tests" aria-labelledby="h-tests">
+  <p class="eyebrow">Correctness evidence</p>
+  <h2 id="h-tests">Removing any one of the 14 fixes makes its test fail: 14 of 14</h2>
+  <p class="lede">A mutation check reverts each fix to its naive version, one at a time, and runs the tests. A fix whose removal no test notices would be unguarded.</p>
+  <details><summary>Every fix and the test that catches it · 14 rows</summary><div class="rk-table"><div class="tablewrap" tabindex="0" role="region" aria-label="Mutation check, results/mutants.json"><table><caption>Mutation check, results/mutants.json</caption><thead><tr><th scope="col">Fix removed</th><th scope="col">File</th><th scope="col">Test that fails</th></tr></thead><tbody><tr><th scope="row">Use the export offset for every hour</th><td><span class="mono">healthlab/build.py</span></td><td><span class="mono">test_local_time_is_rebuilt_from_zone_tags_not_the_export_offset</span></td></tr><tr><th scope="row">One fixed offset per zone, ignoring DST</th><td><span class="mono">healthlab/build.py</span></td><td><span class="mono">test_each_hour_uses_its_own_dst_offset</span></td></tr><tr><th scope="row">Treat zone aliases as different places</th><td><span class="mono">healthlab/build.py</span></td><td><span class="mono">test_zone_aliases_merge_into_one_place</span></td></tr><tr><th scope="row">Present untagged days as observed</th><td><span class="mono">healthlab/build.py</span></td><td><span class="mono">test_days_before_the_first_zone_tag_are_marked_assumed</span></td></tr><tr><th scope="row">Sum steps across sources</th><td><span class="mono">healthlab/build.py</span></td><td><span class="mono">test_iphone_and_watch_steps_are_not_double_counted</span></td></tr><tr><th scope="row">Fill missing days with zero</th><td><span class="mono">healthlab/build.py</span></td><td><span class="mono">test_a_day_without_samples_is_null_not_zero</span></td></tr><tr><th scope="row">Longest sleep source wins</th><td><span class="mono">healthlab/build.py</span></td><td><span class="mono">test_one_sleep_source_per_night_named_and_never_blended</span></td></tr><tr><th scope="row">Key a night by the date it started</th><td><span class="mono">healthlab/build.py</span></td><td><span class="mono">test_one_sleep_source_per_night_named_and_never_blended</span></td></tr><tr><th scope="row">Match device names on a plain space</th><td><span class="mono">healthlab/build.py</span></td><td><span class="mono">test_device_names_with_a_non_breaking_space_still_match</span></td></tr><tr><th scope="row">Hard-code the sleep tracking dates</th><td><span class="mono">healthlab/insights.py</span></td><td><span class="mono">test_sleep_tracking_and_stage_dates_come_from_the_data</span></td></tr><tr><th scope="row">Count any heart-rate hour as a worn day</th><td><span class="mono">healthlab/build.py</span></td><td><span class="mono">test_partial_wear_days_are_not_treated_as_worn</span></td></tr><tr><th scope="row">Average a handful of workout samples</th><td><span class="mono">healthlab/build.py</span></td><td><span class="mono">test_sparse_workout_heart_rate_is_left_blank</span></td></tr><tr><th scope="row">Count Correlation members as samples</th><td><span class="mono">healthlab/parse.py</span></td><td><span class="mono">test_correlation_members_are_not_counted_as_samples</span></td></tr><tr><th scope="row">Append every import without matching</th><td><span class="mono">healthlab/build.py</span></td><td><span class="mono">test_importing_an_overlapping_export_again_adds_nothing</span></td></tr></tbody></table></div></div></details>
+</section>
+
+<section class="s wrap" id="method" aria-labelledby="h-method">
+  <p class="eyebrow">Methodology</p>
+  <h2 id="h-method">How this was measured</h2>
+  <div class="prose" style="margin-top:24px">
+    <p><span class="mono">healthlab/synth.py</span> writes an Apple Health export zip for 1,095 days from seed 0, with each trap planted and its right answer recorded. The analyzer imports the zip the same way it imports a real one, then each trap's answer is compared with the recorded truth.</p>
+    <p>For time zones, hourly active energy is summed by calendar day in two ways and compared with Apple's own daily summary on the 968 days that have one. A day matches if the error is at most 5 % of Apple's total. Weeks run Monday to Sunday and are labeled by their last day.</p>
+  </div>
+  <div class="two">
+    <div><h3>What this shows</h3><ul>
+      <li>Each fix recovers the planted answer for its trap; time zones get 99.2 % of days.</li>
+      <li>Every fix is needed: removing any one makes a test fail.</li>
+      <li>The rebuild's misses sit next to zone changes.</li></ul></div>
+    <div><h3>What it doesn't show</h3><ul>
+      <li>Accuracy on real exports: no real health data was used.</li>
+      <li>Traps this generator does not plant.</li>
+      <li>Run-to-run spread: one seed, one run.</li></ul></div>
+  </div>
+</section>
+
+<section class="s wrap" id="reproduce" aria-labelledby="h-repro">
+  <p class="eyebrow">Reproduce</p>
+  <h2 id="h-repro">Run it yourself</h2>
+  <div class="codewrap"><pre><code>git clone https://github.com/allenwang0/health-export-lab.git
+cd health-export-lab
+make setup      # virtualenv with pinned dependencies (Python 3.11)
+make test
+make mutants    # writes results/mutants.json
+make report     # rebuilds this page from a fresh synthetic run
+make demo       # local app on the synthetic export</code></pre></div>
+  <div class="rk-table"><div class="tablewrap" tabindex="0" role="region" aria-label="Run settings"><table><caption>Run settings</caption><thead><tr><th scope="col">Field</th><th scope="col">Value</th></tr></thead><tbody><tr><th scope="row">Python</th><td>3.11</td></tr><tr><th scope="row">duckdb</th><td>2.0.0</td></tr><tr><th scope="row">pandas</th><td>3.1.1</td></tr><tr><th scope="row">lxml</th><td>6.1.3</td></tr><tr><th scope="row">Generator</th><td><span class="mono">healthlab/synth.py</span></td></tr><tr><th scope="row">Seed</th><td>0</td></tr><tr><th scope="row">Span</th><td>1,095 days (2022-01-03 to 2025-01-01)</td></tr><tr><th scope="row">Days compared</th><td>968 days with active energy in Apple's summary</td></tr><tr><th scope="row">Command</th><td><span class="mono">python scripts/report.py</span></td></tr><tr><th scope="row">Commit</th><td><span class="mono">6c1713f</span></td></tr><tr><th scope="row">Generated</th><td>2026-11-23 05:10 UTC</td></tr></tbody></table></div></div>
+</section>
+</main>
+<footer><div class="wrap"><span><a href="https://allenwang0.github.io/">← Allen Wang</a><a href="https://github.com/allenwang0/health-export-lab">Code ↗</a></span>
+<span>Data from commit <span class="mono">6c1713f</span> · 2026-11-23</span></div></footer>
+<script type="application/json" id="rk-data">{"bands": [{"label": "Within 5 % of Apple's total", "naive": 896, "rebuilt": 960}, {"label": "5\u201325 % off", "naive": 53, "rebuilt": 2}, {"label": "More than 25 % off", "naive": 19, "rebuilt": 6}], "miss": [{"label": "0\u20132 days from a zone change", "naive": 9, "rebuilt": 8}, {"label": "3\u201330 days", "naive": 18, "rebuilt": 0}, {"label": "More than 30 days", "naive": 45, "rebuilt": 0}], "n": 968}</script>
+<script>
+addEventListener("DOMContentLoaded", function () {
+  var D = RK.data("rk-data"), S = [{ key: "rebuilt", name: "Rebuilt local time", color: "var(--series-1)" }, { key: "naive", name: "Export offset (-0700)", color: "var(--series-2)" }];
+  var p = function (v) { return (Number.isInteger(v) ? v : v.toFixed(1)) + " %"; };
+  RKCharts.hbar("#c-bands", { rows: D.bands.map(function (r) { return { label: r.label, values: { rebuilt: 100 * r.rebuilt / D.n, naive: 100 * r.naive / D.n } }; }),
+    series: S, unit: "% of " + D.n.toLocaleString("en-US") + " days", format: p, xmax: 100, title: "Share of days by error against Apple's daily total" });
+  RKCharts.hbar("#c-miss", { rows: D.miss.map(function (r) { return { label: r.label, values: { rebuilt: r.rebuilt, naive: r.naive } }; }),
+    series: S, unit: "days more than 5 % off", format: function (v) { return Math.round(v).toLocaleString("en-US"); }, title: "Days more than 5 percent off, by distance to a zone change" });
+});
+</script>
+</body>
+</html>
